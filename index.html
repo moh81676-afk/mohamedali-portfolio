@@ -1311,7 +1311,12 @@ html[dir="ltr"] #siteHeader .floating-navbar{direction:ltr;}
   <div class="mobile-theme-row">
     <span data-ar="المظهر" data-en="Theme" data-i18n-node="1">Theme</span>
     <button aria-label="Switch to Arabic" class="language-toggle lang-toggle-btn" id="languageToggleMobile" title="Switch to Arabic" type="button">AR</button>
-    <button aria-label="Switch theme" class="theme-toggle" id="themeToggleMobile" title="Switch theme" type="button"><span class="icon-wrap" aria-hidden="true"></span></button>
+    <button aria-label="Switch theme" class="theme-toggle" id="themeToggleMobile" title="Switch theme" type="button">
+      <span class="icon-wrap" aria-hidden="true">
+        <svg class="icon-moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        <svg class="icon-sun" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.6"></circle><path d="M12 2.5v2.4M12 19.1v2.4M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"></path></svg>
+      </span>
+    </button>
   </div>
 </div>
 
@@ -2485,7 +2490,9 @@ document.querySelectorAll('.case-toggle').forEach(btn=>{
 <script>
 // ---------- Feedback / star ratings ----------
 (function(){
-  const STORAGE_KEY = 'portfolioFeedback';
+  const SUPABASE_URL = 'https://gemvcdteopdnyrsrmems.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_0ueF-szoKsvJvx2vzpD6oA_cOt-D7HJ';
+  const REST_URL = SUPABASE_URL + '/rest/v1/feedback';
   const starsInput = document.getElementById('fbStarsInput');
   const starBtns = starsInput ? Array.from(starsInput.querySelectorAll('.fb-star')) : [];
   const nameInput = document.getElementById('fbName');
@@ -2514,16 +2521,35 @@ document.querySelectorAll('.case-toggle').forEach(btn=>{
     return out;
   }
 
-  function loadReviews(){
+  async function loadReviews(){
     try{
-      const raw = localStorage.getItem(STORAGE_KEY);
-      const arr = raw ? JSON.parse(raw) : [];
-      return Array.isArray(arr) ? arr : [];
+      const res = await fetch(REST_URL + '?select=*&order=created_at.desc', {
+        headers: {
+          'apikey': SUPABASE_KEY,
+          'Authorization': 'Bearer ' + SUPABASE_KEY
+        }
+      });
+      if(!res.ok) return [];
+      const data = await res.json();
+      // Map DB columns (message, created_at) to the shape the UI expects (text, date)
+      return data.map(r => ({ name: r.name, rating: r.rating, text: r.message, date: r.created_at }));
     }catch(e){ return []; }
   }
 
-  function saveReviews(arr){
-    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(arr)); }catch(e){}
+  async function addReview(review){
+    try{
+      const res = await fetch(REST_URL, {
+        method: 'POST',
+        headers: {
+          'apikey': SUPABASE_KEY,
+          'Authorization': 'Bearer ' + SUPABASE_KEY,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify({ name: review.name, rating: review.rating, message: review.text })
+      });
+      return res.ok;
+    }catch(e){ return false; }
   }
 
   function escapeHtml(str){
@@ -2537,8 +2563,8 @@ document.querySelectorAll('.case-toggle').forEach(btn=>{
     }catch(e){ return ''; }
   }
 
-  function render(){
-    const reviews = loadReviews();
+  async function render(){
+    const reviews = await loadReviews();
 
     if(reviews.length === 0){
       avgNumEl.textContent = '—';
@@ -2602,7 +2628,7 @@ document.querySelectorAll('.case-toggle').forEach(btn=>{
     }
   }
 
-  submitBtn.addEventListener('click', ()=>{
+  submitBtn.addEventListener('click', async ()=>{
     if(hpInput && hpInput.value){ return; } // honeypot triggered — silently ignore likely bot
 
     const text = (textInput.value || '').trim();
@@ -2615,19 +2641,23 @@ document.querySelectorAll('.case-toggle').forEach(btn=>{
       return;
     }
 
-    const reviews = loadReviews();
-    reviews.push({
+    submitBtn.disabled = true;
+    const ok = await addReview({
       name: (nameInput.value || '').trim().slice(0,60),
       rating: selectedRating,
-      text: text.slice(0,400),
-      date: new Date().toISOString()
+      text: text.slice(0,400)
     });
-    saveReviews(reviews);
+    submitBtn.disabled = false;
+
+    if(!ok){
+      showMsg(isArabic() ? 'حصل خطأ، حاول تاني.' : 'Something went wrong, please try again.', false);
+      return;
+    }
 
     nameInput.value = '';
     textInput.value = '';
     setSelectedRating(0);
-    render();
+    await render();
     showMsg(isArabic() ? 'شكرًا لرأيك!' : 'Thanks for your feedback!', true);
   });
 
@@ -2640,5 +2670,64 @@ document.querySelectorAll('.case-toggle').forEach(btn=>{
   render();
 })();
 </script>
+<style id="claude-mobile-fixes">
+/* 1) Logo/brand was force-hidden by earlier rules. The inline navbar layout
+   only has room for it once the links collapse into the hamburger menu, so
+   only show it there — showing it at every width squeezed the nav links
+   and caused them to overlap the logo/buttons. Also stop it from being
+   hardcoded white text on a near-white background (invisible in light theme). */
+@media (max-width:899px){
+  #siteHeader .nav-brand,
+  .nav-brand{
+    display:flex !important;
+    color:var(--text) !important;
+    background:var(--surface) !important;
+    border:1px solid var(--line) !important;
+  }
+  .nav-brand .brand-text .title{ color:var(--text-dim) !important; }
+}
+@media (max-width:420px){
+  #siteHeader .nav-brand .brand-text .title{ display:none; } /* keep it compact on very small phones */
+}
+
+/* 1b) Same white-on-white ghosting bug on the AR / theme toggle buttons
+   inside the mobile menu (they aren't covered by the desktop-only
+   #siteHeader color fixes further up this file). */
+#mobilemenu .lang-toggle-btn{
+  color:var(--text) !important;
+  background:var(--surface) !important;
+  border:1px solid var(--line) !important;
+}
+#mobilemenu .lang-toggle-btn:hover{
+  color:var(--blue) !important;
+  border-color:var(--blue-border) !important;
+}
+#mobilemenu .theme-toggle{
+  color:var(--blue) !important;
+  background:var(--surface) !important;
+  border:1px solid var(--line) !important;
+}
+
+/* 2) "Let's talk" button used white text on a near-transparent white
+   background, so it disappeared (ghosted) inside the light mobile menu.
+   Make it a solid, theme-aware pill that stays readable in light or dark. */
+#mobilemenu .lets-talk-btn{
+  color:var(--on-accent) !important;
+  background:var(--blue) !important;
+  border-color:var(--blue) !important;
+  box-shadow:none !important;
+}
+#mobilemenu .lets-talk-btn:hover{ filter:brightness(1.08); }
+#mobilemenu .lets-talk-btn svg{ color:var(--on-accent) !important; }
+
+/* 3) Give the fixed header enough clearance so it never overlaps the
+   "DATA ANALYST • AI ENGINEERING" badge on small screens. */
+@media (max-width:900px){
+  #hero.hero-section{ padding-top:108px !important; }
+}
+@media (max-width:560px){
+  #hero.hero-section{ padding-top:96px !important; }
+}
+</style>
 </body>
 </html>
