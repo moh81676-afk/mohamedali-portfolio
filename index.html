@@ -1247,6 +1247,19 @@ html[dir="rtl"] #siteHeader .floating-navbar{direction:rtl;}
 html[dir="ltr"] #siteHeader .floating-navbar{direction:ltr;}
 #siteHeader .navlinks.nav-links{direction:inherit;}
 #siteHeader .nav-actions{direction:ltr;}
+
+/* Mobile RTL fix: the compact mobile toolbar (logo, language/theme
+   buttons, hamburger) only has icon-based controls, so it doesn't need
+   to mirror for Arabic. Flipping "direction" here combined with the
+   margin-inline-start:auto on .nav-actions (used to push it to the far
+   side) was shoving the hamburger button clean off the left edge of the
+   pill in Arabic mode, which is why the header appeared to "open up" /
+   move fully to the left. Keeping the toolbar's own layout LTR on
+   mobile avoids that, while the page content itself still displays
+   correctly RTL. */
+@media (max-width:900px){
+  html[dir="rtl"] #siteHeader .floating-navbar{direction:ltr !important;}
+}
 </style>
 <style>
 /* ===== Journey-style bubble path navigation ===== */
