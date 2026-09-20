@@ -1514,31 +1514,26 @@ html[dir="rtl"] .bubble-label::after{left:auto; right:0;}
   html[dir="rtl"] .fb-review-top{flex-direction:row-reverse;}
   html[dir="rtl"] .fb-summary{flex-direction:row-reverse; text-align:right;}
 
-  /* ---- Auto-scrolling feedback marquee (replaces the old scrollable list) ---- */
-  .fb-marquee-wrap{
-    margin-top:26px;
+  /* ---- Auto-scrolling vertical feedback list (right column, matches the
+     "summary + stacked reviews in one card" layout) ---- */
+  .fb-reviews-wrap{
+    position:relative;
+    height:380px;
     overflow:hidden;
-    -webkit-mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
-    mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+    -webkit-mask-image:linear-gradient(180deg, transparent, #000 8%, #000 92%, transparent);
+    mask-image:linear-gradient(180deg, transparent, #000 8%, #000 92%, transparent);
   }
-  .fb-marquee-wrap.is-static{ -webkit-mask-image:none; mask-image:none; }
-  .fb-marquee-track{
-    display:flex; gap:16px; width:max-content;
-    animation:fbMarqueeScroll linear infinite;
+  .fb-reviews-track{
+    display:flex; flex-direction:column; gap:12px;
+    animation:fbReviewsScrollY linear infinite;
   }
-  .fb-marquee-track.no-scroll{ animation:none; justify-content:center; width:100%; }
-  .fb-marquee-wrap:hover .fb-marquee-track:not(.no-scroll){ animation-play-state:paused; }
-  @keyframes fbMarqueeScroll{
-    from{ transform:translateX(0); }
-    to{ transform:translateX(-50%); }
+  .fb-reviews-track.no-scroll{ animation:none; }
+  .fb-reviews-wrap:hover .fb-reviews-track:not(.no-scroll){ animation-play-state:paused; }
+  @keyframes fbReviewsScrollY{
+    from{ transform:translateY(0); }
+    to{ transform:translateY(-50%); }
   }
-  html[dir="rtl"] .fb-marquee-track{ animation-name:fbMarqueeScrollRtl; }
-  @keyframes fbMarqueeScrollRtl{
-    from{ transform:translateX(0); }
-    to{ transform:translateX(50%); }
-  }
-  .fb-marquee-track .fb-review-card{ flex:0 0 auto; width:260px; }
-  @media (max-width:560px){ .fb-marquee-track .fb-review-card{ width:220px; } }
+  .fb-reviews-wrap .fb-empty{ padding:0; }
 
   /* Home nav button — visually distinct pill CTA, not a plain text link */
   #siteHeader .navlinks.nav-links a.nav-home-link{
@@ -2149,12 +2144,11 @@ html[dir="rtl"] .bubble-label::after{left:auto; right:0;}
 <div class="fb-count" id="fbCount" data-ar="لا يوجد تقييمات بعد" data-en="No ratings yet" data-i18n-node="1">No ratings yet</div>
 </div>
 </div>
-</div>
-</div>
-
-<div class="fb-marquee-wrap reveal" id="fbMarqueeWrap">
+<div class="fb-reviews-wrap" id="fbReviewsWrap">
 <p class="fb-empty" id="fbEmpty" data-ar="كن أول من يكتب رأيه!" data-en="Be the first to leave feedback!" data-i18n-node="1">Be the first to leave feedback!</p>
-<div class="fb-marquee-track" id="fbReviews"></div>
+<div class="fb-reviews-track" id="fbReviews"></div>
+</div>
+</div>
 </div>
 </div>
 </section>
