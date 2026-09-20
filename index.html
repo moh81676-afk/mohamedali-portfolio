@@ -1451,7 +1451,7 @@ html[dir="rtl"] .bubble-label::after{left:auto; right:0;}
     border:1px solid var(--line); border-radius:16px; padding:26px;
     background:var(--surface); backdrop-filter:blur(18px) saturate(150%); -webkit-backdrop-filter:blur(18px) saturate(150%);
   }
-  .feedback-form-card h3{font-size:16px; font-weight:600; margin-bottom:18px;}
+  .feedback-form-card h3, .feedback-list-card h3{font-size:16px; font-weight:600; margin-bottom:18px;}
 
   .fb-field{margin-bottom:16px;}
   .fb-field label{display:block; font-size:13px; color:var(--text-dim); margin-bottom:7px; font-weight:500;}
@@ -1498,11 +1498,10 @@ html[dir="rtl"] .bubble-label::after{left:auto; right:0;}
 
   .fb-summary{display:flex; align-items:center; gap:18px; padding-bottom:20px; margin-bottom:18px; border-bottom:1px solid var(--line);}
   .fb-avg{font-size:44px; font-weight:700; font-family:'Manrope',sans-serif; line-height:1; color:var(--text);}
-  .fb-avg-stars{color:var(--amber); font-size:16px; letter-spacing:2px; margin-bottom:4px;}
+  .fb-avg-stars{color:var(--amber); font-size:20px; letter-spacing:3px; margin-bottom:4px;}
   .fb-avg-stars .empty, .fb-review-stars .empty{color:var(--text-faint);}
   .fb-count{font-size:12.5px; color:var(--text-faint);}
 
-  .fb-reviews{display:flex; flex-direction:column; gap:12px; max-height:420px; overflow-y:auto; padding-right:4px;}
   .fb-empty{color:var(--text-faint); font-size:13.5px; text-align:center; padding:20px 0; margin:0;}
 
   .fb-review-card{border:1px solid var(--line); border-radius:12px; padding:15px 17px; background:var(--surface-2);}
@@ -1514,6 +1513,32 @@ html[dir="rtl"] .bubble-label::after{left:auto; right:0;}
 
   html[dir="rtl"] .fb-review-top{flex-direction:row-reverse;}
   html[dir="rtl"] .fb-summary{flex-direction:row-reverse; text-align:right;}
+
+  /* ---- Auto-scrolling feedback marquee (replaces the old scrollable list) ---- */
+  .fb-marquee-wrap{
+    margin-top:26px;
+    overflow:hidden;
+    -webkit-mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+    mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  }
+  .fb-marquee-wrap.is-static{ -webkit-mask-image:none; mask-image:none; }
+  .fb-marquee-track{
+    display:flex; gap:16px; width:max-content;
+    animation:fbMarqueeScroll linear infinite;
+  }
+  .fb-marquee-track.no-scroll{ animation:none; justify-content:center; width:100%; }
+  .fb-marquee-wrap:hover .fb-marquee-track:not(.no-scroll){ animation-play-state:paused; }
+  @keyframes fbMarqueeScroll{
+    from{ transform:translateX(0); }
+    to{ transform:translateX(-50%); }
+  }
+  html[dir="rtl"] .fb-marquee-track{ animation-name:fbMarqueeScrollRtl; }
+  @keyframes fbMarqueeScrollRtl{
+    from{ transform:translateX(0); }
+    to{ transform:translateX(50%); }
+  }
+  .fb-marquee-track .fb-review-card{ flex:0 0 auto; width:260px; }
+  @media (max-width:560px){ .fb-marquee-track .fb-review-card{ width:220px; } }
 
   /* Home nav button — visually distinct pill CTA, not a plain text link */
   #siteHeader .navlinks.nav-links a.nav-home-link{
@@ -2116,6 +2141,7 @@ html[dir="rtl"] .bubble-label::after{left:auto; right:0;}
 </div>
 
 <div class="feedback-list-card reveal">
+<h3 data-ar="ملخص التقييمات" data-en="Rating Summary" data-i18n-node="1">Rating Summary</h3>
 <div class="fb-summary" id="fbSummary">
 <div class="fb-avg" id="fbAvgNum">—</div>
 <div>
@@ -2123,10 +2149,12 @@ html[dir="rtl"] .bubble-label::after{left:auto; right:0;}
 <div class="fb-count" id="fbCount" data-ar="لا يوجد تقييمات بعد" data-en="No ratings yet" data-i18n-node="1">No ratings yet</div>
 </div>
 </div>
-<div class="fb-reviews" id="fbReviews">
+</div>
+</div>
+
+<div class="fb-marquee-wrap reveal" id="fbMarqueeWrap">
 <p class="fb-empty" id="fbEmpty" data-ar="كن أول من يكتب رأيه!" data-en="Be the first to leave feedback!" data-i18n-node="1">Be the first to leave feedback!</p>
-</div>
-</div>
+<div class="fb-marquee-track" id="fbReviews"></div>
 </div>
 </div>
 </section>
@@ -3015,17 +3043,22 @@ document.querySelectorAll('.case-toggle').forEach(btn=>{
         : ('Based on ' + n + ' ' + (n===1 ? 'review' : 'reviews'));
     }
 
-    reviewsEl.querySelectorAll('.fb-review-card').forEach(el=>el.remove());
+    reviewsEl.innerHTML = '';
+    reviewsEl.classList.remove('no-scroll');
     if(reviews.length === 0){
       emptyEl.style.display = '';
+      reviewsEl.style.display = 'none';
       return;
     }
     emptyEl.style.display = 'none';
+    reviewsEl.style.display = '';
 
-    reviews.slice().reverse().forEach(r=>{
+    const ordered = reviews.slice().reverse();
+    const fallbackName = isArabic() ? 'زائر' : 'Visitor';
+
+    function buildCard(r){
       const card = document.createElement('div');
       card.className = 'fb-review-card';
-      const fallbackName = isArabic() ? 'زائر' : 'Visitor';
       card.innerHTML =
         '<div class="fb-review-top">' +
           '<span class="fb-review-name">' + escapeHtml(r.name || fallbackName) + '</span>' +
@@ -3033,8 +3066,27 @@ document.querySelectorAll('.case-toggle').forEach(btn=>{
         '</div>' +
         '<div class="fb-review-stars">' + starMarkup(r.rating) + '</div>' +
         '<p class="fb-review-text">' + escapeHtml(r.text) + '</p>';
-      reviewsEl.insertBefore(card, emptyEl);
-    });
+      return card;
+    }
+
+    // Enough cards to loop seamlessly -> duplicate the set once so the
+    // marquee can scroll from 0% to -50% (or +50% in RTL) forever without
+    // a visible seam. Too few cards (1-2) just sit still, centered.
+    const enoughToScroll = ordered.length >= 3;
+    if(enoughToScroll){
+      ordered.forEach(r => reviewsEl.appendChild(buildCard(r)));
+      ordered.forEach(r => {
+        const dup = buildCard(r);
+        dup.setAttribute('aria-hidden', 'true');
+        reviewsEl.appendChild(dup);
+      });
+      // Slow, readable pace: ~6s per original card.
+      reviewsEl.style.animationDuration = (ordered.length * 6) + 's';
+    } else {
+      reviewsEl.classList.add('no-scroll');
+      reviewsEl.style.animationDuration = '';
+      ordered.forEach(r => reviewsEl.appendChild(buildCard(r)));
+    }
   }
 
   function setSelectedRating(v){
