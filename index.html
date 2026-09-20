@@ -1516,12 +1516,21 @@ html[dir="rtl"] .bubble-label::after{left:auto; right:0;}
 
   /* ---- Auto-scrolling feedback marquee (replaces the old scrollable list) ---- */
   .fb-marquee-wrap{
-    margin-top:26px;
+    margin-top:22px;
+    padding:22px 0 26px;
+    border:1px solid var(--line); border-radius:16px;
+    background:var(--surface); backdrop-filter:blur(18px) saturate(150%); -webkit-backdrop-filter:blur(18px) saturate(150%);
+    overflow:hidden;
+  }
+  .fb-marquee-label{
+    font-size:12.5px; font-weight:600; letter-spacing:.3px; color:var(--text-faint);
+    text-transform:uppercase; margin:0 24px 16px;
+  }
+  .fb-marquee-track-wrap{
     overflow:hidden;
     -webkit-mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
     mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
   }
-  .fb-marquee-wrap.is-static{ -webkit-mask-image:none; mask-image:none; }
   .fb-marquee-track{
     display:flex; gap:16px; width:max-content;
     animation:fbMarqueeScroll linear infinite;
@@ -2153,8 +2162,11 @@ html[dir="rtl"] .bubble-label::after{left:auto; right:0;}
 </div>
 
 <div class="fb-marquee-wrap reveal" id="fbMarqueeWrap">
+<p class="fb-marquee-label" data-ar="ماذا يقول الزوار" data-en="What visitors are saying" data-i18n-node="1">What visitors are saying</p>
 <p class="fb-empty" id="fbEmpty" data-ar="كن أول من يكتب رأيه!" data-en="Be the first to leave feedback!" data-i18n-node="1">Be the first to leave feedback!</p>
+<div class="fb-marquee-track-wrap">
 <div class="fb-marquee-track" id="fbReviews"></div>
+</div>
 </div>
 </div>
 </section>
