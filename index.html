@@ -1516,12 +1516,22 @@ html[dir="rtl"] .bubble-label::after{left:auto; right:0;}
 
   /* ---- Auto-scrolling feedback marquee (replaces the old scrollable list) ---- */
   .fb-marquee-wrap{
-    margin-top:26px;
+    margin-top:22px;
+    padding:22px 0 26px;
+    border:1px solid var(--line); border-radius:16px;
+    background:var(--surface-solid);
+    overflow:hidden;
+    position:relative; z-index:1; /* fully opaque — keeps the background particle canvas from bleeding/blurring through */
+  }
+  .fb-marquee-label{
+    font-size:12.5px; font-weight:600; letter-spacing:.3px; color:var(--text-faint);
+    text-transform:uppercase; margin:0 24px 16px;
+  }
+  .fb-marquee-track-wrap{
     overflow:hidden;
     -webkit-mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
     mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
   }
-  .fb-marquee-wrap.is-static{ -webkit-mask-image:none; mask-image:none; }
   .fb-marquee-track{
     display:flex; gap:16px; width:max-content;
     animation:fbMarqueeScroll linear infinite;
@@ -1537,8 +1547,13 @@ html[dir="rtl"] .bubble-label::after{left:auto; right:0;}
     from{ transform:translateX(0); }
     to{ transform:translateX(50%); }
   }
-  .fb-marquee-track .fb-review-card{ flex:0 0 auto; width:260px; }
-  @media (max-width:560px){ .fb-marquee-track .fb-review-card{ width:220px; } }
+  .fb-marquee-track .fb-review-card{
+    flex:0 0 auto; width:320px; padding:20px 22px;
+  }
+  .fb-marquee-track .fb-review-name{font-size:15px;}
+  .fb-marquee-track .fb-review-text{font-size:14.5px;}
+  .fb-marquee-track{ gap:20px; }
+  @media (max-width:560px){ .fb-marquee-track .fb-review-card{ width:260px; padding:17px 19px; } }
 
   /* Home nav button — visually distinct pill CTA, not a plain text link */
   #siteHeader .navlinks.nav-links a.nav-home-link{
@@ -2153,8 +2168,11 @@ html[dir="rtl"] .bubble-label::after{left:auto; right:0;}
 </div>
 
 <div class="fb-marquee-wrap reveal" id="fbMarqueeWrap">
+<p class="fb-marquee-label" data-ar="ماذا يقول الزوار" data-en="What visitors are saying" data-i18n-node="1">What visitors are saying</p>
 <p class="fb-empty" id="fbEmpty" data-ar="كن أول من يكتب رأيه!" data-en="Be the first to leave feedback!" data-i18n-node="1">Be the first to leave feedback!</p>
+<div class="fb-marquee-track-wrap">
 <div class="fb-marquee-track" id="fbReviews"></div>
+</div>
 </div>
 </div>
 </section>
