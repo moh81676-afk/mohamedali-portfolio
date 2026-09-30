@@ -1564,6 +1564,13 @@ html[dir="rtl"] .bubble-label::after{left:auto; right:0;}
 <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "85cca990ce36464b831d5513f74bfea9"}'></script>
 <!-- End Cloudflare Web Analytics -->
 
+<style id="hero-typing-style">
+.hero-typing{margin:10px 0 0;min-height:1.7em;font-size:clamp(16px,2.1vw,21px);font-weight:600;color:var(--blue,#49c9f0);font-family:'JetBrains Mono',ui-monospace,Consolas,monospace;letter-spacing:0;direction:ltr;text-align:start}
+:root[dir="rtl"] .hero-typing{direction:rtl}
+.hero-caret{display:inline-block;width:2px;height:1.1em;margin-inline-start:3px;background:currentColor;vertical-align:-.15em;animation:heroCaret 1s steps(1) infinite}
+@keyframes heroCaret{50%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.hero-caret{animation:none}}
+</style>
 </head>
 <body>
 <a class="skip-link" href="#main-content"><span data-ar="تخطي إلى المحتوى الرئيسي" data-en="Skip to main content" data-i18n-node="1">Skip to main content</span></a>
@@ -1724,6 +1731,7 @@ html[dir="rtl"] .bubble-label::after{left:auto; right:0;}
         <span data-ar="أهلاً، أنا محمد علي" data-en="Hi, I'm Mohamed Ali" data-i18n-node="1">Hi, I'm Mohamed Ali</span>
       </h1>
       <h2 class="hero-subtitle" data-ar="محلل بيانات مبتدئ" data-en="Junior Data Analyst" data-i18n-node="1">Junior Data Analyst</h2>
+      <p class="hero-typing" aria-label="Turning raw data into clear decisions"><span id="heroTyped">Turning raw data into clear decisions</span><span class="hero-caret" aria-hidden="true"></span></p>
       <p class="hero-description" data-ar="أحوّل البيانات إلى رؤى واضحة تساعد في اتخاذ قرارات أذكى — أنظف البيانات وأنمذجها وأعرضها باستخدام Excel وPower BI وSQL لمساعدة الفرق على العمل بثقة." data-en="I turn data into clear insights that support smarter decisions — cleaning, modeling and visualizing information with Excel, Power BI and SQL so teams can act with confidence." data-i18n-node="1">I turn data into clear insights that support smarter decisions — cleaning, modeling and visualizing information with Excel, Power BI and SQL so teams can act with confidence.</p>
 
       <div class="social-icons" aria-label="Social links">
@@ -2849,5 +2857,36 @@ document.querySelectorAll('.case-toggle').forEach(btn=>{
   #hero.hero-section{ padding-top:96px !important; }
 }
 </style>
+<script id="hero-typing-script">
+(function(){
+  var el = document.getElementById('heroTyped');
+  if(!el) return;
+  var PHRASES = {
+    en: ['Turning raw data into clear decisions','Excel | Power BI | SQL','Microsoft Certified in Data Analysis'],
+    ar: ['\u0623\u062d\u0648\u0651\u0644 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0627\u0644\u062e\u0627\u0645 \u0625\u0644\u0649 \u0642\u0631\u0627\u0631\u0627\u062a \u0648\u0627\u0636\u062d\u0629','Excel | Power BI | SQL','\u062d\u0627\u0635\u0644 \u0639\u0644\u0649 \u0634\u0647\u0627\u062f\u0629 Microsoft \u0641\u064a \u062a\u062d\u0644\u064a\u0644 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a']
+  };
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var run = 0, timer;
+  function lang(){ return document.documentElement.lang === 'ar' ? 'ar' : 'en'; }
+  function start(){
+    clearTimeout(timer); run++;
+    var id = run, list = PHRASES[lang()], p = 0, i = 0, del = false;
+    if(reduce){ el.textContent = list[0]; return; }
+    el.textContent = '';
+    (function tick(){
+      if(id !== run) return;
+      var text = list[p];
+      el.textContent = text.slice(0, i);
+      var wait = del ? 28 : 65;
+      if(!del && i === text.length){ del = true; wait = 1400; }
+      else if(del && i === 0){ del = false; p = (p + 1) % list.length; wait = 350; }
+      else { i += del ? -1 : 1; }
+      timer = setTimeout(tick, wait);
+    })();
+  }
+  new MutationObserver(start).observe(document.documentElement, {attributes:true, attributeFilter:['lang']});
+  start();
+})();
+</script>
 </body>
 </html>
