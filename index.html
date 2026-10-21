@@ -235,14 +235,20 @@
     transition:opacity .5s ease, background-color .5s ease;
   }
 
-  /* ---------- Lightweight interactive particle background ---------- */
-  #bg-particles{
+  /* ---------- 3D interactive terrain background (three.js) ---------- */
+  #terrain-bg{
     position:fixed; inset:0; z-index:-1; pointer-events:none;
     width:100%; height:100%; display:block;
-    opacity:.55; transition:opacity .6s ease;
+    opacity:.5; transition:opacity .6s ease;
+  }
+  :root[data-theme="light"] #terrain-bg{ opacity:.75; }
+  #terrain-vignette{
+    position:fixed; inset:0; z-index:-1; pointer-events:none;
+    background:radial-gradient(ellipse at 50% 45%, transparent 35%, var(--bg) 100%);
+    opacity:.55;
   }
   @media (prefers-reduced-motion: reduce){
-    #bg-particles{ display:none; }
+    #terrain-bg{ display:none; }
   }
 
   /* ---------- Nav ---------- */
@@ -1172,8 +1178,7 @@ header.site-header,
 #hero.hero-section{
   background:
     radial-gradient(ellipse 55% 80% at 86% 45%, var(--blue-dim), transparent 66%),
-    radial-gradient(ellipse 48% 72% at 10% 60%, rgba(121,40,202,.065), transparent 72%),
-    var(--bg) !important;
+    radial-gradient(ellipse 48% 72% at 10% 60%, rgba(121,40,202,.065), transparent 72%) !important;
 }
 #hero.hero-section .badge-tag,
 #hero.hero-section .orbit-chip{
@@ -1598,7 +1603,8 @@ body.cm-lock{overflow:hidden}
 <body>
 <a class="skip-link" href="#main-content"><span data-ar="تخطي إلى المحتوى الرئيسي" data-en="Skip to main content" data-i18n-node="1">Skip to main content</span></a>
 <div class="bg-grid"></div>
-<canvas aria-hidden="true" id="bg-particles"></canvas>
+<canvas id="terrain-bg" aria-hidden="true"></canvas>
+<div id="terrain-vignette" aria-hidden="true"></div>
 <div class="grain"></div>
 <header id="siteHeader" class="site-header">
   <div id="progress-container" aria-hidden="true"><div id="progress-bar"></div></div>
@@ -2275,160 +2281,6 @@ mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>setM
 document.addEventListener('keydown', e=>{ if(e.key==='Escape' && mobileMenu.classList.contains('open')){ setMobileMenu(false); navToggle.focus(); } });
 window.addEventListener('resize', ()=>{ if(window.innerWidth>860) setMobileMenu(false); });
 
-// ---------- Lightweight interactive particle background (plain 2D canvas, no libraries) ----------
-(function(){
-  const canvas = document.getElementById('bg-particles');
-  if(!canvas) return;
-  const ctx = canvas.getContext('2d');
-  const reduceMotionMQ = window.matchMedia('(prefers-reduced-motion: reduce)');
-  if(reduceMotionMQ.matches) return;
-
-  let w, h, dpr;
-  let particles = [];
-  const mouse = { x:-9999, y:-9999, active:false };
-  let rafId = null;
-  let running = true;
-
-  function themeColor(){
-    const styles = getComputedStyle(document.documentElement);
-    return (styles.getPropertyValue('--blue') || '#49c9f0').trim();
-  }
-  let dotColor = themeColor();
-
-  function hexToRgba(hex, alpha){
-    let c = hex.replace('#','');
-    if(c.length===3) c = c.split('').map(ch=>ch+ch).join('');
-    const num = parseInt(c,16);
-    if(isNaN(num)) return `rgba(73,201,240,${alpha})`;
-    const r = (num>>16)&255, g=(num>>8)&255, b=num&255;
-    return `rgba(${r},${g},${b},${alpha})`;
-  }
-
-  function count(){
-    const area = w*h;
-    const isMobile = w < 760;
-    const target = Math.round(area / (isMobile ? 26000 : 16000));
-    return Math.max(20, Math.min(isMobile ? 45 : 80, target));
-  }
-
-  function resize(){
-    dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-    w = window.innerWidth;
-    h = window.innerHeight;
-    canvas.width = w*dpr;
-    canvas.height = h*dpr;
-    canvas.style.width = w+'px';
-    canvas.style.height = h+'px';
-    ctx.setTransform(dpr,0,0,dpr,0,0);
-    seed();
-  }
-
-  function seed(){
-    const n = count();
-    particles = new Array(n).fill(0).map(()=>({
-      x: Math.random()*w,
-      y: Math.random()*h,
-      vx: (Math.random()-0.5)*0.18,
-      vy: (Math.random()-0.5)*0.18,
-      r: Math.random()*1.6 + 0.6
-    }));
-  }
-
-  function step(){
-    ctx.clearRect(0,0,w,h);
-    const linkDist = w < 760 ? 110 : 150;
-    const linkDist2 = linkDist*linkDist;
-    const mouseLinkDist = w < 760 ? 140 : 190;
-    const mouseLinkDist2 = mouseLinkDist*mouseLinkDist;
-    const dot = hexToRgba(dotColor, 0.55);
-    const line = hexToRgba(dotColor, 0.12);
-    const mouseLine = hexToRgba(dotColor, 0.35);
-
-    for(let i=0;i<particles.length;i++){
-      const p = particles[i];
-      p.x += p.vx; p.y += p.vy;
-      if(p.x < 0 || p.x > w) p.vx *= -1;
-      if(p.y < 0 || p.y > h) p.vy *= -1;
-
-      if(mouse.active){
-        const dx = mouse.x-p.x, dy = mouse.y-p.y;
-        const d2 = dx*dx+dy*dy;
-        const rad = 170;
-        if(d2 < rad*rad){
-          const d = Math.sqrt(d2) || 1;
-          // pulled gently toward the cursor, following its direction
-          const force = (1 - d/rad) * 0.045;
-          p.vx += (dx/d)*force;
-          p.vy += (dy/d)*force;
-          if(d2 < mouseLinkDist2){
-            ctx.beginPath();
-            ctx.moveTo(p.x,p.y);
-            ctx.lineTo(mouse.x,mouse.y);
-            ctx.strokeStyle = mouseLine;
-            ctx.lineWidth = 1;
-            ctx.stroke();
-          }
-        }
-      }
-      // gentle speed damping so it never runs away
-      p.vx *= 0.99; p.vy *= 0.99;
-      const speed = Math.hypot(p.vx,p.vy);
-      if(speed > 1.4){ p.vx = (p.vx/speed)*1.4; p.vy = (p.vy/speed)*1.4; }
-      if(speed < 0.03){ p.vx += (Math.random()-0.5)*0.02; p.vy += (Math.random()-0.5)*0.02; }
-
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-      ctx.fillStyle = dot;
-      ctx.fill();
-
-      for(let j=i+1;j<particles.length;j++){
-        const q = particles[j];
-        const dx = p.x-q.x, dy = p.y-q.y;
-        const d2 = dx*dx+dy*dy;
-        if(d2 < linkDist2){
-          ctx.beginPath();
-          ctx.moveTo(p.x,p.y);
-          ctx.lineTo(q.x,q.y);
-          ctx.strokeStyle = line;
-          ctx.lineWidth = 1;
-          ctx.stroke();
-        }
-      }
-    }
-
-    if(mouse.active){
-      ctx.beginPath();
-      ctx.arc(mouse.x, mouse.y, 2.4, 0, Math.PI*2);
-      ctx.fillStyle = hexToRgba(dotColor, 0.8);
-      ctx.fill();
-    }
-
-    if(running) rafId = requestAnimationFrame(step);
-  }
-
-  window.addEventListener('resize', resize, {passive:true});
-  window.addEventListener('mousemove', e=>{ mouse.x=e.clientX; mouse.y=e.clientY; mouse.active=true; }, {passive:true});
-  window.addEventListener('mouseleave', ()=>{ mouse.active=false; }, {passive:true});
-  window.addEventListener('touchmove', e=>{
-    if(e.touches && e.touches[0]){ mouse.x=e.touches[0].clientX; mouse.y=e.touches[0].clientY; mouse.active=true; }
-  }, {passive:true});
-  window.addEventListener('touchend', ()=>{ mouse.active=false; }, {passive:true});
-
-  document.addEventListener('visibilitychange', ()=>{
-    running = !document.hidden;
-    if(running && !rafId) step();
-  });
-
-  window.addEventListener('themechange', ()=>{ dotColor = themeColor(); });
-
-  reduceMotionMQ.addEventListener?.('change', (e)=>{
-    if(e.matches){ running=false; if(rafId) cancelAnimationFrame(rafId); ctx.clearRect(0,0,w,h); canvas.style.display='none'; }
-  });
-
-  resize();
-  step();
-})();
-
 // ---------- Scroll reveal ----------
 const revealEls = document.querySelectorAll('.reveal');
 const io = new IntersectionObserver((entries)=>{
@@ -2996,6 +2848,267 @@ document.querySelectorAll('.case-toggle').forEach(btn=>{
   });
   new MutationObserver(function(){ if(current) render(); }).observe(document.documentElement, {attributes:true, attributeFilter:['lang']});
 })();
+</script>
+<script type="module">
+import * as THREE from
+    "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js";
+
+if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+
+const canvas = document.getElementById("terrain-bg");
+
+if (canvas) {
+    const scene = new THREE.Scene();
+
+    const camera = new THREE.OrthographicCamera(
+        -10, 10, 6, -6, 0.1, 100
+    );
+
+    camera.position.set(12, 15, 12);
+    camera.lookAt(0, 0.4, 0);
+
+    const renderer = new THREE.WebGLRenderer({
+        canvas,
+        alpha: true,
+        antialias: true
+    });
+
+    renderer.setPixelRatio(
+        Math.min(window.devicePixelRatio || 1, 1.5)
+    );
+    renderer.setClearColor(0x000000, 0);
+
+    const ambient = new THREE.AmbientLight(0x8bbdff, 1.8);
+    scene.add(ambient);
+
+    const light = new THREE.DirectionalLight(0x54dfff, 2.2);
+    light.position.set(6, 10, 5);
+    scene.add(light);
+
+    // Base platform
+    const platformGeometry = new THREE.BoxGeometry(
+        22, 0.18, 22
+    );
+
+    const platformMaterial = new THREE.MeshStandardMaterial({
+        color: 0x0c1c2b,
+        roughness: 0.7,
+        metalness: 0.25,
+        transparent: true,
+        opacity: 0.8
+    });
+
+    const platform = new THREE.Mesh(
+        platformGeometry,
+        platformMaterial
+    );
+
+    scene.add(platform);
+
+    const platformEdges = new THREE.LineSegments(
+        new THREE.EdgesGeometry(platformGeometry),
+        new THREE.LineBasicMaterial({
+            color: 0x61dfff,
+            transparent: true,
+            opacity: 0.32
+        })
+    );
+
+    scene.add(platformEdges);
+
+    const baseY = 0.09;
+
+    // 81 interactive pillars
+    const pillarGeometry = new THREE.BoxGeometry(
+        0.68, 1, 0.68
+    );
+
+    const pillarMaterial = new THREE.MeshStandardMaterial({
+        color: 0x16344a,
+        roughness: 0.65,
+        metalness: 0.2,
+        transparent: true,
+        opacity: 0.88
+    });
+
+    const outlineGeometry = new THREE.EdgesGeometry(
+        pillarGeometry
+    );
+
+    const outlineMaterial = new THREE.LineBasicMaterial({
+        color: 0x62dfff,
+        transparent: true,
+        opacity: 0.48
+    });
+
+    const pillars = [];
+
+    const N = 10;
+    for (let x = -N; x <= N; x++) {
+        for (let z = -N; z <= N; z++) {
+            const group = new THREE.Group();
+
+            group.position.set(x, baseY, z);
+
+            const mesh = new THREE.Mesh(
+                pillarGeometry,
+                pillarMaterial
+            );
+
+            const outline = new THREE.LineSegments(
+                outlineGeometry,
+                outlineMaterial
+            );
+
+            group.add(mesh, outline);
+            scene.add(group);
+
+            pillars.push({
+                x,
+                z,
+                mesh,
+                outline,
+                height: 0.2
+            });
+        }
+    }
+
+    // Mouse position projected onto the 3D ground
+    const raycaster = new THREE.Raycaster();
+    const pointer = new THREE.Vector2();
+    const hitPoint = new THREE.Vector3();
+
+    const groundPlane = new THREE.Plane(
+        new THREE.Vector3(0, 1, 0),
+        -baseY
+    );
+
+    let targetX = 0;
+    let targetZ = 0;
+
+    window.addEventListener("pointermove", (event) => {
+        pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
+        pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+        raycaster.setFromCamera(pointer, camera);
+
+        if (raycaster.ray.intersectPlane(groundPlane, hitPoint)) {
+            targetX = THREE.MathUtils.clamp(hitPoint.x, -N, N);
+            targetZ = THREE.MathUtils.clamp(hitPoint.z, -N, N);
+        }
+    });
+
+    window.addEventListener("pointerleave", () => {
+        targetX = 0;
+        targetZ = 0;
+    });
+
+    // Theme-aware colours (dark / light)
+    const themes = {
+        dark: {
+            ambient: [0x8bbdff, 1.8], light: [0x54dfff, 2.2],
+            platform: 0x0c1c2b, platformEdge: 0x61dfff, platformEdgeOp: 0.32, platformOp: 0.8,
+            pillar: 0x16344a, pillarOp: 0.88, outline: 0x62dfff, outlineOp: 0.48
+        },
+        light: {
+            ambient: [0xffffff, 2.4], light: [0xffffff, 1.6],
+            platform: 0xdbe7f3, platformEdge: 0x0b7fa3, platformEdgeOp: 0.45, platformOp: 0.7,
+            pillar: 0xbcd6ea, pillarOp: 0.9, outline: 0x0b7fa3, outlineOp: 0.7
+        }
+    };
+
+    function applyTheme() {
+        const mode = document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark";
+        const t = themes[mode];
+        ambient.color.setHex(t.ambient[0]); ambient.intensity = t.ambient[1];
+        light.color.setHex(t.light[0]); light.intensity = t.light[1];
+        platformMaterial.color.setHex(t.platform); platformMaterial.opacity = t.platformOp;
+        platformEdges.material.color.setHex(t.platformEdge); platformEdges.material.opacity = t.platformEdgeOp;
+        pillarMaterial.color.setHex(t.pillar); pillarMaterial.opacity = t.pillarOp;
+        outlineMaterial.color.setHex(t.outline); outlineMaterial.opacity = t.outlineOp;
+    }
+    applyTheme();
+    window.addEventListener("themechange", applyTheme);
+
+    // Responsive camera
+    function resize() {
+        const aspect = window.innerWidth / window.innerHeight;
+        const size = 6.2;
+
+        const halfWidth = size * Math.max(aspect, 1);
+        const halfHeight = size * Math.max(1 / aspect, 1);
+
+        camera.left = -halfWidth;
+        camera.right = halfWidth;
+        camera.top = halfHeight;
+        camera.bottom = -halfHeight;
+
+        camera.updateProjectionMatrix();
+
+        renderer.setSize(
+            window.innerWidth,
+            window.innerHeight
+        );
+    }
+
+    window.addEventListener("resize", resize);
+    resize();
+
+    const clock = new THREE.Clock();
+
+    function animate() {
+        requestAnimationFrame(animate);
+
+        const time = clock.getElapsedTime();
+
+        for (const pillar of pillars) {
+            const dx = pillar.x - targetX;
+            const dz = pillar.z - targetZ;
+            const distance = Math.sqrt(dx * dx + dz * dz);
+
+            // Central hill plus a surrounding raised ring
+            const centerRise =
+                1.45 * Math.exp(-(distance * distance) / 1.65);
+
+            const firstRise =
+                0.45 * Math.exp(
+                    -Math.pow(distance - 2.0, 2) / 0.34
+                );
+
+            const secondRise =
+                0.20 * Math.exp(
+                    -Math.pow(distance - 3.1, 2) / 0.65
+                );
+
+            // Subtle ambient movement
+            const gentleWave =
+                0.035 * Math.sin(
+                    (pillar.x + pillar.z) * 0.7 + time * 0.5
+                );
+
+            const targetHeight = Math.max(
+                0.16,
+                0.20 + centerRise + firstRise +
+                secondRise + gentleWave
+            );
+
+            // Smooth rise and fall
+            pillar.height +=
+                (targetHeight - pillar.height) * 0.09;
+
+            pillar.mesh.scale.y = pillar.height;
+            pillar.mesh.position.y = pillar.height / 2;
+
+            pillar.outline.scale.y = pillar.height;
+            pillar.outline.position.y = pillar.height / 2;
+        }
+
+        renderer.render(scene, camera);
+    }
+
+    animate();
+}
+}
 </script>
 </body>
 </html>
