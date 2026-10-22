@@ -697,7 +697,7 @@
   html[dir="rtl"] .project-body,
   html[dir="rtl"] .why-card,
   html[dir="rtl"] .edu-card,
-  html[dir="rtl"] footer{text-align:right;}
+  html[dir="rtl"] footer{text-align:center;}
   html[dir="rtl"] .contact-card{text-align:center;}
 
 /* ===== Final floating navbar + hero upgrade ===== */
@@ -1607,6 +1607,51 @@ body.cm-lock{overflow:hidden}
 }
 @media (max-width:700px){ #education .edu-card, #education .cert-item{width:92%;} }
 </style>
+<style id="contact-form-style">
+.cf-form{max-width:520px;margin:34px auto 6px;text-align:start;display:grid;gap:14px}
+.cf-form label{display:block;font-size:13.5px;color:var(--text-dim);margin-bottom:6px}
+.cf-form input,.cf-form textarea{width:100%;box-sizing:border-box;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--text);font:inherit;font-size:15px;transition:border-color .2s,box-shadow .2s}
+.cf-form input:focus,.cf-form textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-dim)}
+.cf-form textarea{min-height:120px;resize:vertical}
+.cf-btn{padding:13px 22px;border-radius:12px;border:1px solid var(--blue-border);background:var(--blue-dim);color:var(--blue);font:inherit;font-weight:600;font-size:15px;cursor:pointer;transition:transform .2s,background .2s}
+.cf-btn:hover{transform:translateY(-1px);background:var(--blue-border)}
+.cf-btn:disabled{opacity:.6;cursor:wait}
+.cf-msg{min-height:20px;font-size:14px;text-align:center}
+.cf-hp{position:absolute;left:-9999px;opacity:0;height:0;width:0}
+</style>
+<style id="ring-spin">
+#hero .photo-ring::before{animation:ringSpin 14s linear infinite !important;will-change:transform}
+@keyframes ringSpin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){#hero .photo-ring::before{animation:none !important}}
+</style>
+<style id="hero-glass-float">
+#hero .hero-content{
+  padding:36px 38px; border-radius:26px;
+  background:linear-gradient(145deg,rgba(255,255,255,.09),rgba(255,255,255,.025));
+  border:1px solid rgba(255,255,255,.16);
+  backdrop-filter:blur(18px) saturate(160%); -webkit-backdrop-filter:blur(18px) saturate(160%);
+  box-shadow:0 18px 50px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.14);
+}
+:root[data-theme="light"] #hero .hero-content{
+  background:linear-gradient(145deg,rgba(255,255,255,.7),rgba(255,255,255,.35));
+  border-color:rgba(16,24,39,.10);
+  box-shadow:0 18px 44px rgba(16,24,39,.10), inset 0 1px 0 rgba(255,255,255,.8);
+}
+@media (max-width:600px){#hero .hero-content{padding:24px 18px;border-radius:20px}}
+#hero .orbit-chip{animation:chipFloat 4.2s ease-in-out infinite !important}
+#hero .oc1{animation-delay:0s !important}#hero .oc2{animation-delay:-.8s !important}#hero .oc3{animation-delay:-1.6s !important}
+#hero .oc4{animation-delay:-2.4s !important}#hero .oc5{animation-delay:-3.2s !important}#hero .oc6{animation-delay:-1.2s !important}#hero .oc7{animation-delay:-2s !important}
+@keyframes chipFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@media (prefers-reduced-motion:reduce){#hero .orbit-chip{animation:none !important}}
+</style>
+<style id="hero-glass-v2">
+#hero .hero-content,:root[data-theme="light"] #hero .hero-content{
+  background:var(--surface) !important; border:1px solid var(--line) !important;
+  backdrop-filter:blur(18px) saturate(150%); -webkit-backdrop-filter:blur(18px) saturate(150%);
+  box-shadow:none !important;
+}
+#hero .hero-title{white-space:nowrap !important;font-size:clamp(26px,3.9vw,50px) !important;letter-spacing:-1px}
+</style>
 </head>
 <body>
 <a class="skip-link" href="#main-content"><span data-ar="تخطي إلى المحتوى الرئيسي" data-en="Skip to main content" data-i18n-node="1">Skip to main content</span></a>
@@ -1669,9 +1714,6 @@ body.cm-lock{overflow:hidden}
     </div>
 
     <div class="nav-actions">
-      <a href="https://wa.me/201025136218" class="whatsapp-nav-btn" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp">
-        <svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.29-.15-1.73-.85-2-.95-.27-.1-.46-.15-.66.15-.2.29-.76.95-.93 1.14-.17.2-.34.22-.63.07-.29-.15-1.22-.45-2.32-1.43-.86-.76-1.44-1.71-1.61-2-.17-.29-.02-.45.13-.6.13-.13.29-.34.43-.51.15-.17.2-.29.29-.49.1-.2.05-.37-.02-.51-.07-.15-.66-1.59-.9-2.18-.24-.57-.48-.5-.66-.51-.17-.01-.37-.01-.56-.01-.2 0-.51.07-.78.37-.27.29-1.02 1-1.02 2.43 0 1.44 1.05 2.83 1.19 3.02.15.2 2.06 3.14 4.99 4.41.7.3 1.24.48 1.67.61.7.22 1.33.19 1.84.12.56-.08 1.73-.71 1.97-1.39.24-.68.24-1.27.17-1.39-.07-.12-.26-.2-.55-.34z"/><path d="M12.01 2C6.49 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.08-1.33A9.96 9.96 0 0012.01 22C17.53 22 22 17.52 22 12S17.53 2 12.01 2zm0 18.2a8.17 8.17 0 01-4.17-1.14l-.3-.18-3.02.79.8-2.94-.19-.3A8.18 8.18 0 013.8 12c0-4.53 3.68-8.2 8.21-8.2 4.52 0 8.2 3.67 8.2 8.2 0 4.53-3.68 8.2-8.2 8.2z"/></svg>
-      </a>
       <a href="#contact" class="lets-talk-btn">
         <span data-ar="لنتحدث" data-en="Let's talk" data-i18n-node="1">Let's talk</span>
         <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
@@ -1735,9 +1777,6 @@ body.cm-lock{overflow:hidden}
     <a href="#contact" class="lets-talk-btn">
       <span data-ar="لنتحدث" data-en="Let's talk" data-i18n-node="1">Let's talk</span>
       <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-    </a>
-    <a href="https://wa.me/201025136218" class="whatsapp-nav-btn" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp">
-      <svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.29-.15-1.73-.85-2-.95-.27-.1-.46-.15-.66.15-.2.29-.76.95-.93 1.14-.17.2-.34.22-.63.07-.29-.15-1.22-.45-2.32-1.43-.86-.76-1.44-1.71-1.61-2-.17-.29-.02-.45.13-.6.13-.13.29-.34.43-.51.15-.17.2-.29.29-.49.1-.2.05-.37-.02-.51-.07-.15-.66-1.59-.9-2.18-.24-.57-.48-.5-.66-.51-.17-.01-.37-.01-.56-.01-.2 0-.51.07-.78.37-.27.29-1.02 1-1.02 2.43 0 1.44 1.05 2.83 1.19 3.02.15.2 2.06 3.14 4.99 4.41.7.3 1.24.48 1.67.61.7.22 1.33.19 1.84.12.56-.08 1.73-.71 1.97-1.39.24-.68.24-1.27.17-1.39-.07-.12-.26-.2-.55-.34z"/><path d="M12.01 2C6.49 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.08-1.33A9.96 9.96 0 0012.01 22C17.53 22 22 17.52 22 12S17.53 2 12.01 2zm0 18.2a8.17 8.17 0 01-4.17-1.14l-.3-.18-3.02.79.8-2.94-.19-.3A8.18 8.18 0 013.8 12c0-4.53 3.68-8.2 8.21-8.2 4.52 0 8.2 3.67 8.2 8.2 0 4.53-3.68 8.2-8.2 8.2z"/></svg>
     </a>
   </div>
   <div class="mobile-theme-row">
@@ -2205,14 +2244,42 @@ body.cm-lock{overflow:hidden}
 <section id="contact">
 <div class="wrap">
 <div class="contact-card reveal">
-<h2 class="contact-title"><span data-ar="لنحوّل البيانات إلى" data-en="Let's turn data into" data-i18n-node="1">Let's turn data into</span> <span class="accent"><span data-ar="رؤى." data-en="insights." data-i18n-node="1">insights.</span></span></h2>
+<h2 class="contact-title"><span data-ar="هيا نحوّل بياناتك إلى" data-en="Let's turn your data into" data-i18n-node="1">Let's turn your data into</span> <span class="accent"><span data-ar="قرارات تصنع الفرق!" data-en="decisions that make a difference!" data-i18n-node="1">decisions that make a difference!</span></span></h2>
 <p class="contact-sub"><span data-ar="منفتح على فرص عمل عن بُعد في مجال تحليل البيانات للمستوى المبتدئ، ويسعدني التحدث عن كيفية مساعدتي لفريقك على فهم بياناته والاستفادة منها." data-en="Open to remote, entry-level Data Analyst roles. I'd be glad to talk about how I can help your team make sense of its data." data-i18n-node="1">Open to remote, entry-level Data Analyst roles. I'd be glad to talk about how I can help your team make sense of its data.</span></p>
 <div class="contact-links">
 <a aria-label="Email" class="contact-chip" href="mailto:mohammed.ali.shabl1@gmail.com"><span class="ic"><svg fill="none" height="24" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24" width="24"><path d="M3 5h18v14H3z"></path><path d="M3 6l9 7 9-7"></path></svg></span><span class="tip"><span data-ar="البريد الإلكتروني" data-en="Email" data-i18n-node="1">Email</span></span></a>
-<a aria-label="Phone" class="contact-chip" href="tel:+201025136218"><span class="ic"><svg fill="none" height="24" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24" width="24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z"></path></svg></span><span class="tip"><span data-ar="الهاتف" data-en="Phone" data-i18n-node="1">Phone</span></span></a>
+<a aria-label="WhatsApp" class="contact-chip" href="#contact" id="waChip" title="MO_SHABL"><span class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.29-.15-1.73-.85-2-.95-.27-.1-.46-.15-.66.15-.2.29-.76.95-.93 1.14-.17.2-.34.22-.63.07-.29-.15-1.22-.45-2.32-1.43-.86-.76-1.44-1.71-1.61-2-.17-.29-.02-.45.13-.6.13-.13.29-.34.43-.51.15-.17.2-.29.29-.49.1-.2.05-.37-.02-.51-.07-.15-.66-1.59-.9-2.18-.24-.57-.48-.5-.66-.51-.17-.01-.37-.01-.56-.01-.2 0-.51.07-.78.37-.27.29-1.02 1-1.02 2.43 0 1.44 1.05 2.83 1.19 3.02.15.2 2.06 3.14 4.99 4.41.7.3 1.24.48 1.67.61.7.22 1.33.19 1.84.12.56-.08 1.73-.71 1.97-1.39.24-.68.24-1.27.17-1.39-.07-.12-.26-.2-.55-.34z"/><path d="M12.01 2C6.49 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.08-1.33A9.96 9.96 0 0012.01 22C17.53 22 22 17.52 22 12S17.53 2 12.01 2zm0 18.2a8.17 8.17 0 01-4.17-1.14l-.3-.18-3.02.79.8-2.94-.19-.3A8.18 8.18 0 013.8 12c0-4.53 3.68-8.2 8.21-8.2 4.52 0 8.2 3.67 8.2 8.2 0 4.53-3.68 8.2-8.2 8.2z"/></svg></span><span class="tip"><span data-ar="واتساب: MO_SHABL (اضغط للنسخ)" data-en="WhatsApp: MO_SHABL (click to copy)" data-i18n-node="1">WhatsApp: MO_SHABL (click to copy)</span></span></a>
 <a aria-label="LinkedIn" class="contact-chip" href="https://linkedin.com/in/mohamedali-zaho" rel="noopener" target="_blank"><span class="ic"><svg fill="currentColor" height="24" viewbox="0 0 24 24" width="24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.24 8.24h4.53V23H.24V8.24zM8.15 8.24h4.34v2.01h.06c.6-1.14 2.08-2.34 4.29-2.34 4.58 0 5.43 3.02 5.43 6.94V23h-4.53v-6.98c0-1.67-.03-3.81-2.32-3.81-2.33 0-2.69 1.82-2.69 3.7V23H8.15V8.24z"></path></svg></span><span class="tip"><span data-ar="LinkedIn" data-en="LinkedIn" data-i18n-node="1">LinkedIn</span></span></a>
 <a aria-label="GitHub" class="contact-chip" href="https://github.com/moh81676-afk" rel="noopener" target="_blank"><span class="ic"><svg fill="currentColor" height="24" viewbox="0 0 24 24" width="24"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.88-1.36-3.88-1.36-.52-1.34-1.28-1.69-1.28-1.69-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 015.79 0c2.21-1.49 3.18-1.18 3.18-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.41-2.7 5.38-5.27 5.67.41.36.78 1.07.78 2.16 0 1.56-.01 2.82-.01 3.2 0 .3.2.66.79.55A10.52 10.52 0 0023.5 12C23.5 5.65 18.35.5 12 .5z"></path></svg></span><span class="tip"><span data-ar="GitHub" data-en="GitHub" data-i18n-node="1">GitHub</span></span></a>
 </div>
+<form class="cf-form" id="cfForm" novalidate>
+<input type="hidden" name="access_key" value="f7baa128-2780-44fc-a111-972385eec53c"/>
+<input type="hidden" name="subject" value="New message from portfolio website"/>
+<input type="checkbox" name="botcheck" class="cf-hp" tabindex="-1" autocomplete="off" aria-hidden="true"/>
+<div><label for="cfName"><span data-ar="الاسم" data-en="Name" data-i18n-node="1">Name</span></label><input type="text" id="cfName" name="name" required maxlength="80" autocomplete="name"/></div>
+<div><label for="cfEmail"><span data-ar="الإيميل" data-en="Email" data-i18n-node="1">Email</span></label><input type="email" id="cfEmail" name="email" required maxlength="120" autocomplete="email" dir="ltr"/></div>
+<div><label for="cfMsg"><span data-ar="رسالتك" data-en="Your message" data-i18n-node="1">Your message</span></label><textarea id="cfMsg" name="message" required maxlength="1500"></textarea></div>
+<button type="submit" class="cf-btn" id="cfBtn"><span data-ar="إرسال الرسالة" data-en="Send message" data-i18n-node="1">Send message</span></button>
+<div class="cf-msg" id="cfStatus" role="status" aria-live="polite"></div>
+</form>
+<script id="cf-script">
+(function(){
+var f=document.getElementById('cfForm');if(!f)return;
+var st=document.getElementById('cfStatus'),b=document.getElementById('cfBtn');
+function ar(){return document.documentElement.lang==='ar'||document.documentElement.dir==='rtl'}
+function say(a,e,ok){st.textContent=ar()?a:e;st.style.color=ok?'#2ecc71':'#e74c3c'}
+f.addEventListener('submit',function(ev){
+ev.preventDefault();
+if(!f.checkValidity()){say('من فضلك املأ كل الخانات بشكل صحيح.','Please fill in all fields correctly.',false);return}
+b.disabled=true;
+fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(Object.fromEntries(new FormData(f)))})
+.then(function(r){return r.json()})
+.then(function(d){if(d.success){say('تم الإرسال! هرد عليك قريبًا.','Sent! I will get back to you soon.',true);f.reset()}else{say('حصلت مشكلة، حاول تاني.','Something went wrong, please try again.',false)}})
+.catch(function(){say('تعذر الإرسال، تأكد من الاتصال.','Could not send, check your connection.',false)})
+.finally(function(){b.disabled=false});
+});
+})();
+</script>
 <div style="color:var(--text-faint); font-size:13.5px; margin-top:22px;"><span data-ar="طنطا، مصر · متاح للعمل عن بُعد" data-en="Tanta, Egypt · Available for remote work" data-i18n-node="1">Tanta, Egypt · Available for remote work</span></div>
 </div>
 </div>
@@ -3162,6 +3229,12 @@ if (canvas) {
   sec.addEventListener('pointerleave',()=>{y=null;targets();kick();});
   window.addEventListener('scroll',()=>{ if(y!=null){y=null;targets();kick();} },{passive:true});
 })();
+</script>
+<script id="wa-copy">
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('#waChip');if(!a)return;e.preventDefault();
+var t=a.querySelector('.tip span'),old=t.textContent,ar=document.documentElement.lang==='ar'||document.documentElement.dir==='rtl';
+function done(){t.textContent=ar?'تم نسخ MO_SHABL':'Copied MO_SHABL';setTimeout(function(){t.textContent=old},1800)}
+try{navigator.clipboard.writeText('MO_SHABL').then(done,done)}catch(_){done()}});
 </script>
 </body>
 </html>
