@@ -1,7 +1,10 @@
 {
-  "name": "mohamedali-portfolio",
+  "name": "mohamedali-portfolio-site",
   "compatibility_date": "2026-10-01",
   "assets": {
     "directory": "./"
+  },
+  "observability": {
+    "enabled": false
   }
 }
