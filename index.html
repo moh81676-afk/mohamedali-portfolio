@@ -1694,6 +1694,20 @@ html[dir="rtl"] .project-body.rep-card-body,.project-body.rep-card-body{text-ali
 <style id="why-rtl-align">
 html[dir="rtl"] #why .why-card,html[dir="rtl"] #why .why-card h3,html[dir="rtl"] #why .why-card p{text-align:right}
 </style>
+<style id="edu-like-projects">
+#education .edu-grid,#education .cert-list{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+#education .cert-list{margin-top:20px}
+#education .edu-card,#education .cert-item{width:100% !important;translate:none !important;box-sizing:border-box;
+  border-radius:20px;padding:22px 24px;gap:16px;align-items:center;text-align:start;
+  transition:transform .35s cubic-bezier(.2,.8,.3,1),border-color .35s ease,box-shadow .35s ease}
+#education .edu-card:hover,#education .cert-item:hover,#education .cert-item[data-cert]:hover{transform:translateY(-6px);border-color:var(--blue-border);box-shadow:var(--shadow-lg)}
+#education .edu-card .ic,#education .cert-item .ic{width:44px;height:44px;border-radius:12px;flex:none}
+#education .edu-card h3{font-size:16px;font-weight:600}
+#education .cert-item .t{font-size:15px;font-weight:600}
+#education .edu-card .org,#education .edu-card .date,#education .cert-item .s{text-align:start}
+html[dir="rtl"] #education .edu-card{text-align:start}
+@media (max-width:800px){#education .edu-grid,#education .cert-list{grid-template-columns:1fr;gap:14px}#education .edu-card,#education .cert-item{padding:18px}}
+</style>
 </head>
 <body>
 <a class="skip-link" href="#main-content"><span data-ar="تخطي إلى المحتوى الرئيسي" data-en="Skip to main content" data-i18n-node="1">Skip to main content</span></a>
