@@ -1943,6 +1943,7 @@ html[dir="rtl"] #education .edu-card{text-align:start}
 </div>
 </div>
 <div class="stat-list reveal">
+<div class="stat-row"><span class="stat-num count" data-count="5" data-count-from="#projects .project-card">0</span><span class="stat-label"><span data-ar="مشروع مكتمل" data-en="projects completed" data-i18n-node="1">projects completed</span><br/><span data-ar="ومنشور في البورتفوليو" data-en="&amp; published in my portfolio" data-i18n-node="1">&amp; published in my portfolio</span></span></div>
 <div class="stat-row"><span class="stat-num count" data-count="90">0</span><span class="stat-label"><span data-ar="ساعة من التدريب العملي" data-en="hours of hands-on" data-i18n-node="1">hours of hands-on</span><br/><span data-ar="تدريب Excel وPower BI" data-en="Excel &amp; Power BI training" data-i18n-node="1">Excel &amp; Power BI training</span></span></div>
 <div class="stat-row"><span class="stat-num count" data-count="2">0</span><span class="stat-label"><span data-ar="لوحة معلومات متكاملة" data-en="end-to-end dashboard" data-i18n-node="1">end-to-end dashboard</span><br/><span data-ar="ومشاريع تقارير" data-en="&amp; reporting projects" data-i18n-node="1">&amp; reporting projects</span></span></div>
 <div class="stat-row"><span class="stat-num count" data-count="1">0</span><span class="stat-label"><span data-ar="الشهادة المهنية من Microsoft" data-en="Microsoft Professional" data-i18n-node="1">Microsoft Professional</span><br/><span data-ar="في تحليل البيانات" data-en="Certificate in Data Analysis" data-i18n-node="1">Certificate in Data Analysis</span></span></div>
@@ -2481,6 +2482,7 @@ const io = new IntersectionObserver((entries)=>{
 revealEls.forEach(el=>io.observe(el));
 
 // ---------- Number counters ----------
+document.querySelectorAll('[data-count-from]').forEach(el=>{el.dataset.count=document.querySelectorAll(el.dataset.countFrom).length;});
 const counters = document.querySelectorAll('.count');
 const cio = new IntersectionObserver((entries)=>{
   entries.forEach(e=>{
