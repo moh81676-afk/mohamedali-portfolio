@@ -1735,17 +1735,9 @@ html[dir="rtl"] #education .edu-card.edu-feature .edu-tag{letter-spacing:0;text-
 </style>
 <style id="exp-projects-style">.exp-card.exp-projects{margin-top:24px}</style>
 <style id="exp-proj-style">
-.exp-proj-list{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-@media (max-width:800px){.exp-proj-list{grid-template-columns:1fr}}
-.exp-proj{border:1px solid var(--line);border-radius:14px;padding:20px 22px;background:rgba(255,255,255,.02);display:flex;flex-direction:column;gap:14px}
-.exp-proj-title{display:flex;align-items:baseline;gap:10px;font-size:16.5px;font-weight:600;line-height:1.4}
-.exp-proj-n{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--blue);flex-shrink:0}
-.exp-proj-row{display:flex;flex-direction:column;gap:7px}
-.exp-proj-k{font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-faint)}
-html[dir="rtl"] .exp-proj-k{font-family:inherit;letter-spacing:0;text-transform:none;font-size:13px}
-.exp-proj-v{color:var(--text-dim);font-size:14.5px;line-height:1.65}
-.exp-tools{display:flex;flex-wrap:wrap;gap:8px}
-.exp-tool{font-size:12.5px;color:var(--blue);background:var(--blue-dim);border:1px solid var(--blue-border);padding:4px 11px;border-radius:100px}
+.exp-card.exp-projects .exp-proj-name{font-size:16.5px;font-weight:600;margin:26px 0 12px}
+.exp-card.exp-projects .exp-top + .exp-proj-name{margin-top:0}
+.exp-card.exp-projects .exp-proj-ul li strong{color:var(--text);font-weight:600}
 </style>
 </head>
 <body>
@@ -2125,33 +2117,32 @@ html[dir="rtl"] .exp-proj-k{font-family:inherit;letter-spacing:0;text-transform:
 <div class="exp-org"><span data-ar="عملت على 5 مشاريع، وجميعها معروضة في قسم المشاريع بالموقع" data-en="Worked on 5 projects, all showcased in the Projects section of this site" data-i18n-node="1">Worked on 5 projects, all showcased in the Projects section of this site</span></div>
 </div>
 </div>
-<div class="exp-proj-list">
-<div class="exp-proj">
-<div class="exp-proj-title"><span class="exp-proj-n">01</span><span data-ar="لوحة أداء الطلاب" data-en="Student Performance Dashboard" data-i18n-node="1">Student Performance Dashboard</span></div>
-<div class="exp-proj-row"><span class="exp-proj-k"><span data-ar="الأدوات" data-en="Tools" data-i18n-node="1">Tools</span></span><div class="exp-tools"><span class="exp-tool">Excel</span><span class="exp-tool">Power BI</span><span class="exp-tool"><span data-ar="نمذجة البيانات" data-en="Data Modeling" data-i18n-node="1">Data Modeling</span></span><span class="exp-tool"><span data-ar="تتبع مؤشرات الأداء" data-en="KPI Tracking" data-i18n-node="1">KPI Tracking</span></span></div></div>
-<div class="exp-proj-row"><span class="exp-proj-k"><span data-ar="التحدي" data-en="Challenge" data-i18n-node="1">Challenge</span></span><span class="exp-proj-v"><span data-ar="كان يتم تتبع الأداء الأكاديمي يدويًا عبر جداول بيانات متفرقة، مما جعل اكتشاف الاتجاهات أمرًا صعبًا." data-en="Academic performance was tracked manually across scattered spreadsheets, making trends hard to spot." data-i18n-node="1">Academic performance was tracked manually across scattered spreadsheets, making trends hard to spot.</span></span></div>
-</div>
-<div class="exp-proj">
-<div class="exp-proj-title"><span class="exp-proj-n">02</span><span data-ar="متتبّع بيانات المبيعات" data-en="Sales Data Tracker" data-i18n-node="1">Sales Data Tracker</span></div>
-<div class="exp-proj-row"><span class="exp-proj-k"><span data-ar="الأدوات" data-en="Tools" data-i18n-node="1">Tools</span></span><div class="exp-tools"><span class="exp-tool">Microsoft Excel</span><span class="exp-tool"><span data-ar="الصيغ الديناميكية" data-en="Dynamic Formulas" data-i18n-node="1">Dynamic Formulas</span></span><span class="exp-tool"><span data-ar="التنسيق الشرطي" data-en="Conditional Formatting" data-i18n-node="1">Conditional Formatting</span></span><span class="exp-tool"><span data-ar="الجداول المحورية" data-en="Pivot Tables" data-i18n-node="1">Pivot Tables</span></span></div></div>
-<div class="exp-proj-row"><span class="exp-proj-k"><span data-ar="التحدي" data-en="Challenge" data-i18n-node="1">Challenge</span></span><span class="exp-proj-v"><span data-ar="كان يتم إعادة حساب الإيرادات الشهرية يدويًا في كل دورة، مما كان بطيئًا وعرضة للأخطاء." data-en="Monthly revenue was recalculated by hand every cycle, which was slow and error-prone." data-i18n-node="1">Monthly revenue was recalculated by hand every cycle, which was slow and error-prone.</span></span></div>
-</div>
-<div class="exp-proj">
-<div class="exp-proj-title"><span class="exp-proj-n">03</span><span data-ar="لوحة تحليل تنمية واقتصاد دول العالم" data-en="Global Country Development &amp; Economy Dashboard" data-i18n-node="1">Global Country Development &amp; Economy Dashboard</span></div>
-<div class="exp-proj-row"><span class="exp-proj-k"><span data-ar="الأدوات" data-en="Tools" data-i18n-node="1">Tools</span></span><div class="exp-tools"><span class="exp-tool">Power BI</span><span class="exp-tool">Power Query</span><span class="exp-tool">DAX</span><span class="exp-tool"><span data-ar="أدوات التصفية" data-en="Slicers" data-i18n-node="1">Slicers</span></span></div></div>
-<div class="exp-proj-row"><span class="exp-proj-k"><span data-ar="التحدي" data-en="Challenge" data-i18n-node="1">Challenge</span></span><span class="exp-proj-v"><span data-ar="بيانات الدول موزعة على أعمدة كثيرة ويصعب مقارنتها وتحديد أين تتركز الفجوات في التنمية والاقتصاد." data-en="Country data spans many columns, making it hard to compare countries and see where development and economic gaps are concentrated." data-i18n-node="1">Country data spans many columns, making it hard to compare countries and see where development and economic gaps are concentrated.</span></span></div>
-</div>
-<div class="exp-proj">
-<div class="exp-proj-title"><span class="exp-proj-n">04</span><span data-ar="لوحة أداء المبيعات" data-en="Sales Performance Dashboard" data-i18n-node="1">Sales Performance Dashboard</span></div>
-<div class="exp-proj-row"><span class="exp-proj-k"><span data-ar="الأدوات" data-en="Tools" data-i18n-node="1">Tools</span></span><div class="exp-tools"><span class="exp-tool">Power BI</span><span class="exp-tool">Power Query</span><span class="exp-tool">DAX</span><span class="exp-tool"><span data-ar="تصور البيانات" data-en="Data Visualization" data-i18n-node="1">Data Visualization</span></span></div></div>
-<div class="exp-proj-row"><span class="exp-proj-k"><span data-ar="التحدي" data-en="Challenge" data-i18n-node="1">Challenge</span></span><span class="exp-proj-v"><span data-ar="تحويل بيانات المبيعات إلى مؤشرات أداء واضحة تساعد على فهم الأداء ودعم اتخاذ القرارات." data-en="Turn sales data into clear KPIs that explain performance and support decisions." data-i18n-node="1">Turn sales data into clear KPIs that explain performance and support decisions.</span></span></div>
-</div>
-<div class="exp-proj">
-<div class="exp-proj-title"><span class="exp-proj-n">05</span><span data-ar="لوحة تحليل بيانات المبيعات" data-en="Sales Data Analysis Dashboard" data-i18n-node="1">Sales Data Analysis Dashboard</span></div>
-<div class="exp-proj-row"><span class="exp-proj-k"><span data-ar="الأدوات" data-en="Tools" data-i18n-node="1">Tools</span></span><div class="exp-tools"><span class="exp-tool">Tableau</span><span class="exp-tool"><span data-ar="الحقول المحسوبة" data-en="Calculated Fields" data-i18n-node="1">Calculated Fields</span></span><span class="exp-tool"><span data-ar="التصور التفاعلي" data-en="Interactive Visualization" data-i18n-node="1">Interactive Visualization</span></span></div></div>
-<div class="exp-proj-row"><span class="exp-proj-k"><span data-ar="التحدي" data-en="Challenge" data-i18n-node="1">Challenge</span></span><span class="exp-proj-v"><span data-ar="كانت بيانات المبيعات الخام كبيرة ومعقدة، وتضم فئات ومناطق وفترات زمنية متعددة." data-en="The raw sales data was large and complex, with multiple categories, regions and time periods." data-i18n-node="1">The raw sales data was large and complex, with multiple categories, regions and time periods.</span></span></div>
-</div>
-</div>
+<div class="exp-proj-name"><span data-ar="لوحة أداء الطلاب" data-en="Student Performance Dashboard" data-i18n-node="1">Student Performance Dashboard</span></div>
+<ul class="exp-list exp-proj-ul">
+<li><span class="bullet">▸</span><span><strong><span data-ar="التحديات:" data-en="Challenges:" data-i18n-node="1">Challenges:</span></strong> <span data-ar="كان يتم تتبع الأداء الأكاديمي يدويًا عبر جداول بيانات متفرقة، مما جعل اكتشاف الاتجاهات أمرًا صعبًا." data-en="Academic performance was tracked manually across scattered spreadsheets, making trends hard to spot." data-i18n-node="1">Academic performance was tracked manually across scattered spreadsheets, making trends hard to spot.</span></span></li>
+<li><span class="bullet">▸</span><span><strong><span data-ar="الأدوات:" data-en="Tools:" data-i18n-node="1">Tools:</span></strong> <span data-ar="Excel، Power BI، نمذجة البيانات، تتبع مؤشرات الأداء" data-en="Excel, Power BI, Data Modeling, KPI Tracking" data-i18n-node="1">Excel, Power BI, Data Modeling, KPI Tracking</span></span></li>
+</ul>
+<div class="exp-proj-name"><span data-ar="متتبّع بيانات المبيعات" data-en="Sales Data Tracker" data-i18n-node="1">Sales Data Tracker</span></div>
+<ul class="exp-list exp-proj-ul">
+<li><span class="bullet">▸</span><span><strong><span data-ar="التحديات:" data-en="Challenges:" data-i18n-node="1">Challenges:</span></strong> <span data-ar="كان يتم إعادة حساب الإيرادات الشهرية يدويًا في كل دورة، مما كان بطيئًا وعرضة للأخطاء." data-en="Monthly revenue was recalculated by hand every cycle, which was slow and error-prone." data-i18n-node="1">Monthly revenue was recalculated by hand every cycle, which was slow and error-prone.</span></span></li>
+<li><span class="bullet">▸</span><span><strong><span data-ar="الأدوات:" data-en="Tools:" data-i18n-node="1">Tools:</span></strong> <span data-ar="Microsoft Excel، الصيغ الديناميكية، التنسيق الشرطي، الجداول المحورية" data-en="Microsoft Excel, Dynamic Formulas, Conditional Formatting, Pivot Tables" data-i18n-node="1">Microsoft Excel, Dynamic Formulas, Conditional Formatting, Pivot Tables</span></span></li>
+</ul>
+<div class="exp-proj-name"><span data-ar="لوحة تحليل تنمية واقتصاد دول العالم" data-en="Global Country Development &amp; Economy Dashboard" data-i18n-node="1">Global Country Development &amp; Economy Dashboard</span></div>
+<ul class="exp-list exp-proj-ul">
+<li><span class="bullet">▸</span><span><strong><span data-ar="التحديات:" data-en="Challenges:" data-i18n-node="1">Challenges:</span></strong> <span data-ar="بيانات الدول موزعة على أعمدة كثيرة ويصعب مقارنتها وتحديد أين تتركز الفجوات في التنمية والاقتصاد." data-en="Country data spans many columns, making it hard to compare countries and see where development and economic gaps are concentrated." data-i18n-node="1">Country data spans many columns, making it hard to compare countries and see where development and economic gaps are concentrated.</span></span></li>
+<li><span class="bullet">▸</span><span><strong><span data-ar="الأدوات:" data-en="Tools:" data-i18n-node="1">Tools:</span></strong> <span data-ar="Power BI، Power Query، DAX، أدوات التصفية" data-en="Power BI, Power Query, DAX, Slicers" data-i18n-node="1">Power BI, Power Query, DAX, Slicers</span></span></li>
+</ul>
+<div class="exp-proj-name"><span data-ar="لوحة أداء المبيعات" data-en="Sales Performance Dashboard" data-i18n-node="1">Sales Performance Dashboard</span></div>
+<ul class="exp-list exp-proj-ul">
+<li><span class="bullet">▸</span><span><strong><span data-ar="التحديات:" data-en="Challenges:" data-i18n-node="1">Challenges:</span></strong> <span data-ar="تحويل بيانات المبيعات إلى مؤشرات أداء واضحة تساعد على فهم الأداء ودعم اتخاذ القرارات." data-en="Turn sales data into clear KPIs that explain performance and support decisions." data-i18n-node="1">Turn sales data into clear KPIs that explain performance and support decisions.</span></span></li>
+<li><span class="bullet">▸</span><span><strong><span data-ar="الأدوات:" data-en="Tools:" data-i18n-node="1">Tools:</span></strong> <span data-ar="Power BI، Power Query، DAX، تصور البيانات" data-en="Power BI, Power Query, DAX, Data Visualization" data-i18n-node="1">Power BI, Power Query, DAX, Data Visualization</span></span></li>
+</ul>
+<div class="exp-proj-name"><span data-ar="لوحة تحليل بيانات المبيعات" data-en="Sales Data Analysis Dashboard" data-i18n-node="1">Sales Data Analysis Dashboard</span></div>
+<ul class="exp-list exp-proj-ul">
+<li><span class="bullet">▸</span><span><strong><span data-ar="التحديات:" data-en="Challenges:" data-i18n-node="1">Challenges:</span></strong> <span data-ar="كانت بيانات المبيعات الخام كبيرة ومعقدة، وتضم فئات ومناطق وفترات زمنية متعددة." data-en="The raw sales data was large and complex, with multiple categories, regions and time periods." data-i18n-node="1">The raw sales data was large and complex, with multiple categories, regions and time periods.</span></span></li>
+<li><span class="bullet">▸</span><span><strong><span data-ar="الأدوات:" data-en="Tools:" data-i18n-node="1">Tools:</span></strong> <span data-ar="Tableau، الحقول المحسوبة، التصور التفاعلي" data-en="Tableau, Calculated Fields, Interactive Visualization" data-i18n-node="1">Tableau, Calculated Fields, Interactive Visualization</span></span></li>
+</ul>
+
 </div>
 </div>
 </section>
