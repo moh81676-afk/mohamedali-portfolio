@@ -2303,8 +2303,8 @@ html[dir="rtl"] #education .edu-card.edu-feature .edu-tag{letter-spacing:0;text-
 <h3 data-ar="شارك رأيك" data-en="Share your feedback" data-i18n-node="1">Share your feedback</h3>
 
 <div class="fb-field">
-<label for="fbName" data-ar="الاسم (اختياري)" data-en="Name (optional)" data-i18n-node="1">Name (optional)</label>
-<input type="text" id="fbName" maxlength="60" autocomplete="name"/>
+<label for="fbName" data-ar="الاسم" data-en="Name" data-i18n-node="1">Name</label>
+<input type="text" id="fbName" maxlength="60" autocomplete="name" required aria-required="true"/>
 </div>
 
 <div class="fb-field">
@@ -2817,6 +2817,11 @@ document.querySelectorAll('.case-toggle').forEach(btn=>{
     if(hpInput && hpInput.value){ return; } // honeypot triggered — silently ignore likely bot
 
     const text = (textInput.value || '').trim();
+    if(!(nameInput.value || '').trim()){
+      showMsg(isArabic() ? 'من فضلك اكتب اسمك.' : 'Please enter your name.', false);
+      nameInput.focus();
+      return;
+    }
     if(selectedRating < 1){
       showMsg(isArabic() ? 'من فضلك اختر تقييمًا بالنجوم.' : 'Please select a star rating.', false);
       return;
