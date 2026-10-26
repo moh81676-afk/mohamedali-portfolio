@@ -43,6 +43,10 @@
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Noto+Sans+Arabic:wght@400;500;600;700&amp;family=Manrope:wght@500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<!-- Thmanyah Arabic fonts (used in Arabic/RTL mode) -->
+<link href="https://cdn.jsdelivr.net/npm/@dawod/thmanyah-font-web@1.2.0/serif-display.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@dawod/thmanyah-font-web@1.2.0/serif-text.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@dawod/thmanyah-font-web@1.2.0/sans.css" rel="stylesheet"/>
 <style>
   :root, :root[data-theme="dark"]{
     --bg: #090c13;
@@ -161,7 +165,9 @@
   #mobilemenu a{padding:8px 12px;line-height:1.4;}
   .mobile-theme-row{width:min(100%,360px);}
   html[dir="rtl"]{text-align:right;}
-  html[dir="rtl"] body, html[dir="rtl"] button, html[dir="rtl"] input, html[dir="rtl"] textarea{font-family:'Noto Sans Arabic','Inter','Manrope',system-ui,sans-serif;}
+  html[dir="rtl"] body, html[dir="rtl"] button, html[dir="rtl"] input, html[dir="rtl"] textarea{font-family:'Thmanyah Serif Text','Thmanyah Sans','Noto Sans Arabic','Inter','Manrope',system-ui,sans-serif;}
+  html[dir="rtl"] h1, html[dir="rtl"] h2, html[dir="rtl"] h3, html[dir="rtl"] .display{font-family:'Thmanyah Serif Display','Thmanyah Serif Text','Noto Sans Arabic','Inter',system-ui,sans-serif;font-weight:700;}
+  html[dir="rtl"] .logo, html[dir="rtl"] .hero-role, html[dir="rtl"] .stat-num, html[dir="rtl"] .case-toggle{font-family:'Thmanyah Serif Text','Thmanyah Sans','Noto Sans Arabic','Inter',system-ui,sans-serif;}
   html[dir="rtl"] .skip-link{left:auto;right:12px;}
   html[dir="rtl"] .eyebrow-line{flex-direction:row-reverse;justify-content:flex-end;}
   html[dir="rtl"] .hero-statement,.hero-statement{max-width:58ch;}
