@@ -529,30 +529,6 @@
   .case-body{max-height:0; overflow:hidden; transition:max-height .4s ease;}
   .case-body-inner{padding-top:16px; border-top:1px solid var(--line); margin-top:16px; color:var(--text-dim); font-size:14px; line-height:1.7;}
 
-  /* ---------- Journey timeline ---------- */
-  .journey-track{
-    position:relative; padding:28px 24px 24px;
-    border-radius:20px;
-    background:linear-gradient(180deg, color-mix(in srgb, var(--bg) 55%, transparent), color-mix(in srgb, var(--bg) 70%, transparent));
-    -webkit-backdrop-filter:blur(14px) saturate(140%);
-    backdrop-filter:blur(14px) saturate(140%);
-    border:1px solid color-mix(in srgb, var(--line) 70%, transparent);
-    box-shadow:0 8px 30px rgba(0,0,0,.18);
-  }
-  .journey-line{position:absolute; top:39px; left:24px; right:24px; height:2px; background:var(--line);}
-  .journey-line-fill{position:absolute; top:0; left:0; height:100%; width:0; background:linear-gradient(90deg, var(--blue), var(--amber)); transition:width 1.6s cubic-bezier(.2,.8,.3,1);}
-  html[dir="rtl"] .journey-line-fill{left:auto; right:0; background:linear-gradient(270deg, var(--blue), var(--amber));}
-  .journey-steps{display:grid; grid-template-columns:repeat(6,1fr); gap:14px; position:relative;}
-  @media (max-width:920px){ .journey-steps{grid-template-columns:repeat(3,1fr); row-gap:44px;} .journey-line{display:none;} }
-  @media (max-width:560px){ .journey-steps{grid-template-columns:1fr; row-gap:30px;} }
-  .journey-step{display:flex; flex-direction:column; align-items:center; text-align:center; gap:14px;}
-  .journey-dot{
-    width:16px; height:16px; border-radius:50%; background:var(--bg); border:2px solid var(--text-faint); z-index:1;
-    transition:border-color .4s ease, background .4s ease, box-shadow .4s ease;
-  }
-  .journey-step.active .journey-dot{border-color:var(--blue); background:var(--blue); box-shadow:0 0 14px var(--blue);}
-  .journey-label{font-size:13.5px; color:var(--text-dim); font-weight:500;}
-  .journey-num{font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--text-faint);}
 
   /* ---------- Why work with me ---------- */
   .why-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
@@ -1758,10 +1734,6 @@ html[dir="rtl"] #education .edu-card{text-align:start}
         <span class="bubble-icon"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"></path></svg></span>
         <span class="bubble-label" data-ar="مشاريعي" data-en="Projects" data-i18n-node="1">Projects</span>
       </a>
-      <a href="#journey" class="bubble-item">
-        <span class="bubble-icon"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 21s-7-6.5-7-11a7 7 0 0 1 14 0c0 4.5-7 11-7 11z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></span>
-        <span class="bubble-label" data-ar="مشواري" data-en="Journey" data-i18n-node="1">Journey</span>
-      </a>
       <a href="#education" class="bubble-item">
         <span class="bubble-icon"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 3 2 8l10 5 10-5-10-5z"></path><path d="M6 10.5V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-5.5"></path><path d="M22 8v6"></path></svg></span>
         <span class="bubble-label" data-ar="التعليم" data-en="Education" data-i18n-node="1">Education</span>
@@ -1820,10 +1792,6 @@ html[dir="rtl"] #education .edu-card{text-align:start}
   <a href="#projects" class="mobile-link">
     <span class="mobile-link-icon"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"></path></svg></span>
     <span data-ar="مشاريعي" data-en="Projects" data-i18n-node="1">Projects</span>
-  </a>
-  <a href="#journey" class="mobile-link">
-    <span class="mobile-link-icon"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 21s-7-6.5-7-11a7 7 0 0 1 14 0c0 4.5-7 11-7 11z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></span>
-    <span data-ar="مشواري" data-en="Journey" data-i18n-node="1">Journey</span>
   </a>
   <a href="#education" class="mobile-link">
     <span class="mobile-link-icon"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 3 2 8l10 5 10-5-10-5z"></path><path d="M6 10.5V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-5.5"></path><path d="M22 8v6"></path></svg></span>
@@ -2212,26 +2180,6 @@ html[dir="rtl"] #education .edu-card{text-align:start}
 </div>
 </div>
 </section>
-<!-- ================= JOURNEY ================= -->
-<section id="journey">
-<div class="wrap">
-<div class="sec-head">
-<div class="sec-kicker reveal"><span class="num">05</span> <span data-ar="رحلتي" data-en="Journey" data-i18n-node="1">Journey</span></div>
-<h2 class="sec-title reveal"><span data-ar="كيف وصلت إلى هنا." data-en="How I got here." data-i18n-node="1">How I got here.</span></h2>
-</div>
-<div class="journey-track reveal">
-<div class="journey-line"><div class="journey-line-fill" id="journeyFill"></div></div>
-<div class="journey-steps" id="journeySteps">
-<div class="journey-step"><span class="journey-num">01</span><span class="journey-dot"></span><span class="journey-label"><span data-ar="التعلّم" data-en="Learning" data-i18n-node="1">Learning</span></span></div>
-<div class="journey-step"><span class="journey-num">02</span><span class="journey-dot"></span><span class="journey-label"><span data-ar="تنظيف البيانات" data-en="Data Cleaning" data-i18n-node="1">Data Cleaning</span></span></div>
-<div class="journey-step"><span class="journey-num">03</span><span class="journey-dot"></span><span class="journey-label"><span data-ar="تحليل البيانات" data-en="Data Analysis" data-i18n-node="1">Data Analysis</span></span></div>
-<div class="journey-step"><span class="journey-num">04</span><span class="journey-dot"></span><span class="journey-label"><span data-ar="التصور البصري" data-en="Visualization" data-i18n-node="1">Visualization</span></span></div>
-<div class="journey-step"><span class="journey-num">05</span><span class="journey-dot"></span><span class="journey-label"><span data-ar="المشاريع" data-en="Projects" data-i18n-node="1">Projects</span></span></div>
-<div class="journey-step"><span class="journey-num">06</span><span class="journey-dot"></span><span class="journey-label"><span data-ar="النمو المهني" data-en="Professional Growth" data-i18n-node="1">Professional Growth</span></span></div>
-</div>
-</div>
-</div>
-</section>
 <!-- ================= WHY WORK WITH ME ================= -->
 <section id="why">
 <div class="wrap">
@@ -2515,22 +2463,6 @@ const bio = new IntersectionObserver((entries)=>{
   });
 }, {threshold:0.3});
 bars.forEach(b=>bio.observe(b));
-
-// ---------- Journey timeline scroll progress ----------
-const journeySection = document.getElementById('journey');
-const journeyFill = document.getElementById('journeyFill');
-const journeySteps = document.querySelectorAll('.journey-step');
-function updateJourney(){
-  const rect = journeySection.getBoundingClientRect();
-  const vh = window.innerHeight;
-  let progress = (vh*0.75 - rect.top) / (rect.height*0.7);
-  progress = Math.max(0, Math.min(1, progress));
-  journeyFill.style.width = (progress*100)+'%';
-  const activeCount = Math.round(progress * journeySteps.length);
-  journeySteps.forEach((s,i)=> s.classList.toggle('active', i < activeCount));
-}
-window.addEventListener('scroll', updateJourney, {passive:true});
-updateJourney();
 
 // ---------- Project case study toggles ----------
 document.querySelectorAll('.case-toggle').forEach(btn=>{
