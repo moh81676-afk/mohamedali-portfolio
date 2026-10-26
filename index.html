@@ -1692,6 +1692,40 @@ html[dir="rtl"] #why .why-card,html[dir="rtl"] #why .why-card h3,html[dir="rtl"]
 html[dir="rtl"] #education .edu-card{text-align:start}
 @media (max-width:800px){#education .edu-grid,#education .cert-list{grid-template-columns:1fr;gap:14px}#education .edu-card,#education .cert-item{padding:18px}}
 </style>
+<style id="edu-feature-style">
+/* Featured education cards (degree + training) — distinct from the certificate list */
+#education .edu-card.edu-feature{
+  position:relative;overflow:hidden;display:grid;grid-template-columns:auto 1fr;align-items:center;
+  column-gap:14px;row-gap:20px;padding:28px 30px;border-radius:22px;
+  border:1px solid var(--amber-border);border-inline-start:5px solid var(--amber);
+  background:linear-gradient(135deg,var(--amber-dim),transparent 65%),var(--surface);
+}
+#education .edu-card.edu-feature::after{
+  content:attr(data-n);position:absolute;inset-block-start:-14px;inset-inline-end:18px;
+  font-family:'JetBrains Mono',monospace;font-size:88px;font-weight:700;line-height:1;
+  color:var(--amber);opacity:.10;pointer-events:none;direction:ltr;
+}
+#education .edu-card.edu-feature .ic{
+  width:54px;height:54px;border-radius:50%;background:var(--amber-dim);color:var(--amber);
+  border:1px solid var(--amber-border);
+}
+#education .edu-card.edu-feature .ic svg{width:24px;height:24px}
+#education .edu-card.edu-feature:hover{border-color:var(--amber);box-shadow:0 12px 34px -14px var(--amber)}
+#education .edu-card.edu-feature:hover .ic{filter:drop-shadow(0 0 8px var(--amber))}
+#education .edu-card.edu-feature .edu-tag{
+  justify-self:start;font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--amber);
+  border:1px dashed var(--amber-border);padding:5px 12px;border-radius:100px;
+}
+html[dir="rtl"] #education .edu-card.edu-feature .edu-tag{letter-spacing:0;text-transform:none;font-family:inherit;font-size:13px}
+#education .edu-card.edu-feature > div:last-child{grid-column:1/-1}
+#education .edu-card.edu-feature h3{font-size:21px;font-weight:700;line-height:1.35}
+#education .edu-card.edu-feature .org{color:var(--text-dim);font-size:14.5px;margin-top:8px}
+#education .edu-card.edu-feature .date{
+  display:inline-block;margin-top:14px;padding:5px 12px;border-radius:8px;
+  background:var(--amber-dim);color:var(--amber);font-size:12.5px;
+}
+</style>
 </head>
 <body>
 <a class="skip-link" href="#main-content"><span data-ar="تخطي إلى المحتوى الرئيسي" data-en="Skip to main content" data-i18n-node="1">Skip to main content</span></a>
@@ -2205,14 +2239,16 @@ html[dir="rtl"] #education .edu-card{text-align:start}
 <h2 class="sec-title reveal"><span data-ar="التعليم والشهادات." data-en="Education &amp; certifications." data-i18n-node="1">Education &amp; certifications.</span></h2>
 </div>
 <div class="edu-grid reveal">
-<div class="edu-card">
+<div class="edu-card edu-feature" data-n="01">
 <div class="ic"><svg fill="none" height="16" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24" width="16"><path d="M22 10L12 5 2 10l10 5 10-5z"></path><path d="M6 12v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"></path></svg></div>
+<span class="edu-tag"><span data-ar="الدرجة العلمية" data-en="Degree" data-i18n-node="1">Degree</span></span>
 <div><h3><span data-ar="بكالوريوس تكنولوجيا التعليم" data-en="B.Sc. Educational Technology" data-i18n-node="1">B.Sc. Educational Technology</span></h3>
 <div class="org"><span data-ar="جامعة طنطا · طنطا، مصر" data-en="Tanta University · Tanta, Egypt" data-i18n-node="1">Tanta University · Tanta, Egypt</span></div>
 <div class="date"><span data-ar="متوقع التخرج 2028" data-en="Expected 2028" data-i18n-node="1">Expected 2028</span></div></div>
 </div>
-<div class="edu-card">
+<div class="edu-card edu-feature" data-n="02">
 <div class="ic"><svg fill="none" height="16" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24" width="16"><path d="M3 3v18h18"></path><path d="M7 15l4-5 3 3 5-7"></path></svg></div>
+<span class="edu-tag"><span data-ar="برنامج تدريبي" data-en="Training Program" data-i18n-node="1">Training Program</span></span>
 <div><h3><span data-ar="تحليل البيانات باستخدام Excel وPower BI" data-en="Data Analysis with Excel &amp; Power BI" data-i18n-node="1">Data Analysis with Excel &amp; Power BI</span></h3>
 <div class="org"><span data-ar="جامعة طنطا · برنامج 90 ساعة" data-en="Tanta University · 90-hour program" data-i18n-node="1">Tanta University · 90-hour program</span></div>
 <div class="date">Nov 2025 — Feb 2026</div></div>
