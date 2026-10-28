@@ -1758,18 +1758,6 @@ html[dir="rtl"] #education .edu-card.edu-feature .edu-tag{letter-spacing:0;text-
 @media (max-width:980px){#education .cert-gallery{grid-template-columns:1fr 1fr}}
 @media (max-width:620px){#education .cert-gallery{grid-template-columns:1fr;gap:16px}}
 </style>
-<style id="hero-name-card-style">
-#hero .hero-title{display:flex !important;flex-direction:column;align-items:flex-start;gap:10px;width:fit-content;max-width:100%;box-sizing:border-box;white-space:normal !important;
-  padding:18px 26px 20px;border:1px solid var(--amber-border);border-inline-end:5px solid var(--amber);border-radius:18px;
-  background:linear-gradient(135deg,var(--amber-dim),transparent 65%),var(--surface);backdrop-filter:blur(18px) saturate(150%);-webkit-backdrop-filter:blur(18px) saturate(150%);
-  box-shadow:0 12px 34px -16px var(--amber);overflow:hidden;position:relative;text-shadow:none}
-#hero .hero-title::after{content:"01";position:absolute;inset-inline-end:16px;top:-14px;font-family:'JetBrains Mono',monospace;font-size:96px;font-weight:800;line-height:1;color:var(--amber);opacity:.10;pointer-events:none;direction:ltr}
-#hero .hero-greet{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);border:1px dashed var(--amber-border);padding:5px 14px;border-radius:100px;line-height:1.4}
-#hero .hero-name-fx{display:block;font-size:clamp(40px,5.6vw,76px);font-weight:800;line-height:1.1;letter-spacing:-1.5px;white-space:nowrap;color:var(--text);position:relative;z-index:1}
-:root[dir="rtl"] #hero .hero-greet{font-family:'Noto Sans Arabic',sans-serif;letter-spacing:0;text-transform:none;font-size:14px}
-:root[dir="rtl"] #hero .hero-name-fx{letter-spacing:0;line-height:1.3}
-@media (max-width:560px){#hero .hero-title{padding:14px 18px 16px;border-radius:14px}#hero .hero-name-fx{font-size:clamp(34px,11vw,48px);letter-spacing:-.8px}#hero .hero-title::after{font-size:72px}}
-</style>
 <canvas id="terrain-bg" aria-hidden="true"></canvas>
 <div id="terrain-vignette" aria-hidden="true"></div>
 <div class="grain"></div>
@@ -1910,8 +1898,7 @@ html[dir="rtl"] #education .edu-card.edu-feature .edu-tag{letter-spacing:0;text-
       </div>
 
       <h1 class="hero-title">
-        <span class="hero-greet" data-ar="أهلاً، أنا" data-en="Hi, I'm" data-i18n-node="1">Hi, I'm</span>
-        <span class="hero-name-fx" data-ar="محمد علي" data-en="Mohamed Ali" data-i18n-node="1">Mohamed Ali</span>
+        <span data-ar="أهلاً، أنا محمد علي" data-en="Hi, I'm Mohamed Ali" data-i18n-node="1">Hi, I'm Mohamed Ali</span>
       </h1>
       <h2 class="hero-subtitle" data-ar="محلل بيانات مبتدئ" data-en="Junior Data Analyst" data-i18n-node="1">Junior Data Analyst</h2>
       <p class="hero-typing" aria-label="Turning raw data into clear decisions"><span id="heroTyped">Turning raw data into clear decisions</span><span class="hero-caret" aria-hidden="true"></span></p>
