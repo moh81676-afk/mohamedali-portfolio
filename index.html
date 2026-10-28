@@ -1775,6 +1775,17 @@ html[dir="rtl"] #education .edu-card.edu-feature .edu-tag{letter-spacing:0;text-
 @media (max-width:560px){#hero .hero-name-fx{font-size:clamp(40px,13vw,58px);letter-spacing:-1px}}
 @media (prefers-reduced-motion:reduce){#hero .hero-name-fx,#hero .hero-name-fx::after{animation:none}}
 </style>
+<style id="sec-title-fx-style">
+.sec-head{max-width:820px !important}
+h2.sec-title{display:block;width:fit-content;max-width:100%;position:relative;padding-bottom:.28em;font-family:'Manrope','Inter',sans-serif;font-size:clamp(32px,4.6vw,56px);font-weight:800;line-height:1.18;letter-spacing:-1.2px;
+  background:linear-gradient(100deg,#49c9f0 0%,#6ea8ff 28%,#a58bff 52%,#ff7ac6 74%,#49c9f0 100%);background-size:240% 100%;
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
+  filter:drop-shadow(0 6px 22px rgba(110,168,255,.28));animation:nameFlow 8s linear infinite}
+h2.sec-title::after{content:"";position:absolute;inset-inline-start:0;bottom:0;height:.085em;min-height:4px;width:min(46%,220px);border-radius:99px;background:linear-gradient(90deg,#49c9f0,#a58bff,#ff7ac6);box-shadow:0 0 16px rgba(165,139,255,.5)}
+:root[dir="rtl"] h2.sec-title{font-family:'Cairo','Noto Sans Arabic',sans-serif;font-weight:900;letter-spacing:0;line-height:1.35}
+@media (max-width:560px){h2.sec-title{font-size:clamp(28px,8.4vw,38px);letter-spacing:-.6px}}
+@media (prefers-reduced-motion:reduce){h2.sec-title{animation:none}}
+</style>
 <canvas id="terrain-bg" aria-hidden="true"></canvas>
 <div id="terrain-vignette" aria-hidden="true"></div>
 <div class="grain"></div>
