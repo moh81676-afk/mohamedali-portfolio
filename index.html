@@ -42,7 +42,7 @@
 <meta content="website" property="og:type"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Noto+Sans+Arabic:wght@400;500;600;700&amp;family=Manrope:wght@500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Noto+Sans+Arabic:wght@400;500;600;700;800&amp;family=Manrope:wght@500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
 <!-- Thmanyah Arabic fonts (used in Arabic/RTL mode) -->
 <link href="https://cdn.jsdelivr.net/npm/@dawod/thmanyah-font-web@1.2.0/serif-display.css" rel="stylesheet"/>
 <link href="https://cdn.jsdelivr.net/npm/@dawod/thmanyah-font-web@1.2.0/serif-text.css" rel="stylesheet"/>
@@ -1758,6 +1758,15 @@ html[dir="rtl"] #education .edu-card.edu-feature .edu-tag{letter-spacing:0;text-
 @media (max-width:980px){#education .cert-gallery{grid-template-columns:1fr 1fr}}
 @media (max-width:620px){#education .cert-gallery{grid-template-columns:1fr;gap:16px}}
 </style>
+<style id="hero-name-gold-style">
+#hero .hero-title{display:flex !important;flex-direction:column;align-items:flex-start;gap:4px;white-space:normal !important;max-width:none}
+#hero .hero-greet{font-size:clamp(18px,2vw,24px);font-weight:600;color:var(--text-dim,#93a0b8);text-shadow:none}
+#hero .hero-name-fx{display:block;font-family:'Manrope','Inter',sans-serif;font-size:clamp(44px,5.8vw,78px);font-weight:800;line-height:1.08;letter-spacing:-1.5px;white-space:nowrap;
+  background:linear-gradient(135deg,var(--amber),#ffe07a);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:var(--amber);
+  filter:drop-shadow(0 6px 24px var(--amber-dim));text-shadow:none}
+:root[dir="rtl"] #hero .hero-name-fx{font-family:'Noto Sans Arabic',sans-serif;font-weight:800;letter-spacing:0;line-height:1.3}
+@media (max-width:560px){#hero .hero-name-fx{font-size:clamp(38px,12vw,54px);letter-spacing:-.8px}}
+</style>
 <canvas id="terrain-bg" aria-hidden="true"></canvas>
 <div id="terrain-vignette" aria-hidden="true"></div>
 <div class="grain"></div>
@@ -1898,7 +1907,8 @@ html[dir="rtl"] #education .edu-card.edu-feature .edu-tag{letter-spacing:0;text-
       </div>
 
       <h1 class="hero-title">
-        <span data-ar="أهلاً، أنا محمد علي" data-en="Hi, I'm Mohamed Ali" data-i18n-node="1">Hi, I'm Mohamed Ali</span>
+        <span class="hero-greet" data-ar="أهلاً، أنا" data-en="Hi, I'm" data-i18n-node="1">Hi, I'm</span>
+        <span class="hero-name-fx" data-ar="محمد علي" data-en="Mohamed Ali" data-i18n-node="1">Mohamed Ali</span>
       </h1>
       <h2 class="hero-subtitle" data-ar="محلل بيانات مبتدئ" data-en="Junior Data Analyst" data-i18n-node="1">Junior Data Analyst</h2>
       <p class="hero-typing" aria-label="Turning raw data into clear decisions"><span id="heroTyped">Turning raw data into clear decisions</span><span class="hero-caret" aria-hidden="true"></span></p>
