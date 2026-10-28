@@ -1743,6 +1743,21 @@ html[dir="rtl"] #education .edu-card.edu-feature .edu-tag{letter-spacing:0;text-
 <body>
 <a class="skip-link" href="#main-content"><span data-ar="تخطي إلى المحتوى الرئيسي" data-en="Skip to main content" data-i18n-node="1">Skip to main content</span></a>
 <div class="bg-grid"></div>
+<style id="cert-gallery-style">
+#education .cert-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:28px}
+.cert-card{display:flex;flex-direction:column;overflow:hidden;cursor:pointer;border:1px solid var(--line);border-radius:14px;background:var(--surface);backdrop-filter:blur(18px) saturate(150%);-webkit-backdrop-filter:blur(18px) saturate(150%);transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease}
+.cert-card:hover{transform:translateY(-6px);border-color:var(--blue-border);box-shadow:var(--glow-blue)}
+.cert-card:focus-visible{outline:2px solid var(--blue,#49c9f0);outline-offset:2px}
+.cert-media{aspect-ratio:16/11;background:#fff;overflow:hidden;border-bottom:1px solid var(--line)}
+.cert-media img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;transition:transform .5s ease}
+.cert-card:hover .cert-media img{transform:scale(1.04)}
+.cert-media--ph{display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--blue-dim),transparent);color:var(--blue)}
+.cert-body{padding:16px 18px 20px;display:flex;flex-direction:column;gap:8px;text-align:start}
+.cert-title{margin:0;font-size:16px;line-height:1.45;font-weight:700;color:var(--blue)}
+.cert-desc{margin:0;font-size:13.5px;line-height:1.7;color:var(--text-dim,#93a0b8)}
+@media (max-width:980px){#education .cert-gallery{grid-template-columns:1fr 1fr}}
+@media (max-width:620px){#education .cert-gallery{grid-template-columns:1fr;gap:16px}}
+</style>
 <canvas id="terrain-bg" aria-hidden="true"></canvas>
 <div id="terrain-vignette" aria-hidden="true"></div>
 <div class="grain"></div>
@@ -2301,30 +2316,36 @@ html[dir="rtl"] #education .edu-card.edu-feature .edu-tag{letter-spacing:0;text-
 <div class="date">Nov 2025 — Feb 2026</div></div>
 </div>
 </div>
-<div class="cert-list reveal">
-<div class="cert-item" data-cert="tanta" role="button" tabindex="0" aria-haspopup="dialog">
-<div class="ic"><svg fill="none" height="16" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24" width="16"><path d="M12 2l3 6 6 1-4.5 4.5L18 20l-6-3-6 3 1.5-6.5L3 9l6-1z"></path></svg></div>
-<div><div class="t"><span data-ar="تحليل البيانات باستخدام Excel وPower BI (90 ساعة)" data-en="Data Analysis with Excel &amp; Power BI (90 Hours)" data-i18n-node="1">Data Analysis with Excel &amp; Power BI (90 Hours)</span></div><div class="s"><span data-ar="جامعة طنطا · نوفمبر 2025 – فبراير 2026" data-en="Tanta University · Nov 2025 – Feb 2026" data-i18n-node="1">Tanta University · Nov 2025 – Feb 2026</span></div></div>
+<div class="cert-gallery reveal">
+<div class="cert-card" data-cert="tanta" role="button" tabindex="0" aria-haspopup="dialog">
+<div class="cert-media"><img src="images/img-09-251d04ee.jpg" alt="Data Analysis with Excel &amp; Power BI (90 Hours)" loading="lazy"></div>
+<div class="cert-body"><h3 class="cert-title"><span data-ar="تحليل البيانات باستخدام Excel وPower BI (90 ساعة)" data-en="Data Analysis with Excel &amp; Power BI (90 Hours)" data-i18n-node="1">Data Analysis with Excel &amp; Power BI (90 Hours)</span></h3>
+<p class="cert-desc"><span data-ar="جامعة طنطا · نوفمبر 2025 – فبراير 2026" data-en="Tanta University · Nov 2025 – Feb 2026" data-i18n-node="1">Tanta University · Nov 2025 – Feb 2026</span></p></div>
 </div>
-<div class="cert-item" data-cert="ibm" role="button" tabindex="0" aria-haspopup="dialog">
-<div class="ic"><svg fill="none" height="16" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24" width="16"><path d="M12 2l3 6 6 1-4.5 4.5L18 20l-6-3-6 3 1.5-6.5L3 9l6-1z"></path></svg></div>
-<div><div class="t"><span data-ar="أساسيات البيانات — IBM SkillsBuild" data-en="Data Fundamentals — IBM SkillsBuild" data-i18n-node="1">Data Fundamentals — IBM SkillsBuild</span></div><div class="s"><span data-ar="IBM SkillsBuild · 13 أغسطس 2026" data-en="IBM SkillsBuild · August 13, 2026" data-i18n-node="1">IBM SkillsBuild · August 13, 2026</span></div></div>
+<div class="cert-card" data-cert="ibm" role="button" tabindex="0" aria-haspopup="dialog">
+<div class="cert-media"><img src="images/img-10-96be9ce9.jpg" alt="Data Fundamentals — IBM SkillsBuild" loading="lazy"></div>
+<div class="cert-body"><h3 class="cert-title"><span data-ar="أساسيات البيانات — IBM SkillsBuild" data-en="Data Fundamentals — IBM SkillsBuild" data-i18n-node="1">Data Fundamentals — IBM SkillsBuild</span></h3>
+<p class="cert-desc"><span data-ar="IBM SkillsBuild · 13 أغسطس 2026" data-en="IBM SkillsBuild · August 13, 2026" data-i18n-node="1">IBM SkillsBuild · August 13, 2026</span></p></div>
 </div>
-<div class="cert-item" data-cert="depi" role="button" tabindex="0" aria-haspopup="dialog">
-<div class="ic"><svg fill="none" height="16" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24" width="16"><path d="M12 2l3 6 6 1-4.5 4.5L18 20l-6-3-6 3 1.5-6.5L3 9l6-1z"></path></svg></div>
-<div><div class="t"><span data-ar="مهارات العمل الحر الاحترافي" data-en="Skills for Professional Freelancers" data-i18n-node="1">Skills for Professional Freelancers</span></div><div class="s"><span data-ar="مبادرة رواد مصر الرقمية (DEPI) — وزارة الاتصالات وتكنولوجيا المعلومات" data-en="Digital Egypt Pioneers Initiative (DEPI) — Ministry of Communications and Information Technology" data-i18n-node="1">Digital Egypt Pioneers Initiative (DEPI) — Ministry of Communications and Information Technology</span></div></div>
+<div class="cert-card" data-cert="depi" role="button" tabindex="0" aria-haspopup="dialog">
+<div class="cert-media cert-media--ph" aria-hidden="true"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="9" r="6"></circle><path d="M8.5 14.5L7 22l5-3 5 3-1.5-7.5"></path></svg></div>
+<div class="cert-body"><h3 class="cert-title"><span data-ar="مهارات العمل الحر الاحترافي" data-en="Skills for Professional Freelancers" data-i18n-node="1">Skills for Professional Freelancers</span></h3>
+<p class="cert-desc"><span data-ar="مبادرة رواد مصر الرقمية (DEPI) — وزارة الاتصالات وتكنولوجيا المعلومات" data-en="Digital Egypt Pioneers Initiative (DEPI) — Ministry of Communications and Information Technology" data-i18n-node="1">Digital Egypt Pioneers Initiative (DEPI) — Ministry of Communications and Information Technology</span></p></div>
 </div>
-<div class="cert-item" data-cert="innovegypt" role="button" tabindex="0" aria-haspopup="dialog">
-<div class="ic"><svg fill="none" height="16" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24" width="16"><path d="M12 2l3 6 6 1-4.5 4.5L18 20l-6-3-6 3 1.5-6.5L3 9l6-1z"></path></svg></div>
-<div><div class="t"><span data-ar="برنامج InnovEgypt — شهادة تقدير (دورة تدريبية 45 ساعة ومشروع نهائي لشركة ناشئة محتملة)" data-en="InnovEgypt Program — Certificate of Acknowledgement (45-hour training course and final startup project)" data-i18n-node="1">InnovEgypt Program — Certificate of Acknowledgement (45-hour training course and final startup project)</span></div><div class="s"><span data-ar="ITIDA وTIEC" data-en="ITIDA &amp; TIEC" data-i18n-node="1">ITIDA &amp; TIEC</span></div></div>
+<div class="cert-card" data-cert="innovegypt" role="button" tabindex="0" aria-haspopup="dialog">
+<div class="cert-media"><img src="images/img-11-55104d1c.jpg" alt="InnovEgypt Program — Certificate of Acknowledgement" loading="lazy"></div>
+<div class="cert-body"><h3 class="cert-title"><span data-ar="برنامج InnovEgypt — شهادة تقدير" data-en="InnovEgypt Program — Certificate of Acknowledgement" data-i18n-node="1">InnovEgypt Program — Certificate of Acknowledgement</span></h3>
+<p class="cert-desc"><span data-ar="ITIDA وTIEC · دورة تدريبية 45 ساعة" data-en="ITIDA &amp; TIEC · 45-hour training course" data-i18n-node="1">ITIDA &amp; TIEC · 45-hour training course</span></p></div>
 </div>
-<div class="cert-item" data-cert="esg" role="button" tabindex="0" aria-haspopup="dialog">
-<div class="ic"><svg fill="none" height="16" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24" width="16"><path d="M12 2l3 6 6 1-4.5 4.5L18 20l-6-3-6 3 1.5-6.5L3 9l6-1z"></path></svg></div>
-<div><div class="t"><span data-ar="الجاهزية لمعايير ESG للشركات الصغيرة والمتوسطة والناشئة" data-en="ESG Readiness for SMEs &amp; Startups" data-i18n-node="1">ESG Readiness for SMEs &amp; Startups</span></div><div class="s"><span data-ar="ITIDA وTIEC وCreativa بالتعاون مع KenKo · 17 سبتمبر 2026" data-en="ITIDA, TIEC &amp; Creativa with KenKo · September 17, 2026" data-i18n-node="1">ITIDA, TIEC &amp; Creativa with KenKo · September 17, 2026</span></div></div>
+<div class="cert-card" data-cert="esg" role="button" tabindex="0" aria-haspopup="dialog">
+<div class="cert-media"><img src="images/img-12-1b980dbb.jpg" alt="ESG Readiness for SMEs &amp; Startups" loading="lazy"></div>
+<div class="cert-body"><h3 class="cert-title"><span data-ar="الجاهزية لمعايير ESG للشركات الصغيرة والمتوسطة والناشئة" data-en="ESG Readiness for SMEs &amp; Startups" data-i18n-node="1">ESG Readiness for SMEs &amp; Startups</span></h3>
+<p class="cert-desc"><span data-ar="ITIDA وTIEC وCreativa بالتعاون مع KenKo · 17 سبتمبر 2026" data-en="ITIDA, TIEC &amp; Creativa with KenKo · September 17, 2026" data-i18n-node="1">ITIDA, TIEC &amp; Creativa with KenKo · September 17, 2026</span></p></div>
 </div>
-<div class="cert-item" data-cert="genai" role="button" tabindex="0" aria-haspopup="dialog">
-<div class="ic"><svg fill="none" height="16" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24" width="16"><path d="M12 2l3 6 6 1-4.5 4.5L18 20l-6-3-6 3 1.5-6.5L3 9l6-1z"></path></svg></div>
-<div><div class="t"><span data-ar="ورش أسبوع التمكين التقني — هاكاثون الذكاء الاصطناعي التوليدي للتعليم 2026" data-en="Technical Enablement Week Workshops — Gen AI for Education Hackathon 2026" data-i18n-node="1">Technical Enablement Week Workshops — Gen AI for Education Hackathon 2026</span></div><div class="s"><span data-ar="جامعة مصر للمعلوماتية · 23–31 أغسطس 2026" data-en="Egypt University of Informatics · August 23–31, 2026" data-i18n-node="1">Egypt University of Informatics · August 23–31, 2026</span></div></div>
+<div class="cert-card" data-cert="genai" role="button" tabindex="0" aria-haspopup="dialog">
+<div class="cert-media"><img src="images/img-13-2fcb1d69.jpg" alt="Technical Enablement Week Workshops — Gen AI for Education Hackathon 2026" loading="lazy"></div>
+<div class="cert-body"><h3 class="cert-title"><span data-ar="ورش أسبوع التمكين التقني — هاكاثون الذكاء الاصطناعي التوليدي للتعليم 2026" data-en="Technical Enablement Week Workshops — Gen AI for Education Hackathon 2026" data-i18n-node="1">Technical Enablement Week Workshops — Gen AI for Education Hackathon 2026</span></h3>
+<p class="cert-desc"><span data-ar="جامعة مصر للمعلوماتية · 23–31 أغسطس 2026" data-en="Egypt University of Informatics · August 23–31, 2026" data-i18n-node="1">Egypt University of Informatics · August 23–31, 2026</span></p></div>
 </div>
 </div>
 </div>
@@ -3077,7 +3098,7 @@ document.querySelectorAll('.case-toggle').forEach(btn=>{
     modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); document.body.classList.remove('cm-lock');
     current = null; if(lastFocus && lastFocus.focus) lastFocus.focus();
   }
-  document.querySelectorAll('.cert-item[data-cert]').forEach(function(el){
+  document.querySelectorAll('.cert-item[data-cert], .cert-card[data-cert]').forEach(function(el){
     el.addEventListener('click', function(){ open(el.getAttribute('data-cert'), el); });
     el.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); open(el.getAttribute('data-cert'), el); } });
   });
